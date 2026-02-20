@@ -1,0 +1,148 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import Stripe from "stripe";
+import { CalendarCheck, Mail, DollarSign, ArrowRight, TrendingUp } from "lucide-react";
+
+export const dynamic = "force-dynamic";
+
+async function getStats() {
+  try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2026-01-28.clover" });
+    const intents = await stripe.paymentIntents.list({ limit: 100 });
+    const succeeded = intents.data.filter((p) => p.status === "succeeded");
+    const totalRevenue = succeeded.reduce((sum, p) => sum + p.amount, 0) / 100;
+    const thisMonth = succeeded.filter((p) => {
+      const d = new Date(p.created * 1000);
+      const now = new Date();
+      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    });
+    return { totalBookings: succeeded.length, totalRevenue, monthlyBookings: thisMonth.length };
+  } catch {
+    return { totalBookings: 0, totalRevenue: 0, monthlyBookings: 0 };
+  }
+}
+
+async function getRecentBookings() {
+  try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2026-01-28.clover" });
+    const intents = await stripe.paymentIntents.list({ limit: 5 });
+    return intents.data.filter((p) => p.status === "succeeded");
+  } catch {
+    return [];
+  }
+}
+
+export default async function AdminDashboard() {
+  const cookieStore = await cookies();
+  const session = cookieStore.get("everestics_admin");
+  if (!session || session.value !== process.env.ADMIN_SESSION_TOKEN) redirect("/admin/login");
+
+  const [stats, recent] = await Promise.all([getStats(), getRecentBookings()]);
+
+  const statCards = [
+    {
+      label: "Total Bookings",
+      value: stats.totalBookings,
+      icon: CalendarCheck,
+      color: "#F97316",
+    },
+    {
+      label: "This Month",
+      value: stats.monthlyBookings,
+      icon: TrendingUp,
+      color: "#2563EB",
+    },
+    {
+      label: "Total Revenue",
+      value: `$${stats.totalRevenue.toLocaleString("en-AU", { minimumFractionDigits: 0 })}`,
+      icon: DollarSign,
+      color: "#16A34A",
+    },
+    {
+      label: "Quote Requests",
+      value: "Via Email",
+      icon: Mail,
+      color: "#9CA3AF",
+    },
+  ];
+
+  return (
+    <div>
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold" style={{ color: "#111827" }}>Dashboard</h1>
+        <p className="text-sm mt-1" style={{ color: "#6B7280" }}>Welcome back. Here&apos;s your business at a glance.</p>
+      </div>
+
+      {/* Stat cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {statCards.map((card) => {
+          const Icon = card.icon;
+          return (
+            <div
+              key={card.label}
+              className="rounded-2xl p-5"
+              style={{ background: "#FFFFFF", border: "1px solid #E8EAED" }}
+            >
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
+                style={{ background: `${card.color}12` }}
+              >
+                <Icon size={18} style={{ color: card.color }} />
+              </div>
+              <p className="text-2xl font-bold mb-0.5" style={{ color: "#111827" }}>{card.value}</p>
+              <p className="text-xs" style={{ color: "#6B7280" }}>{card.label}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Recent bookings */}
+      <div
+        className="rounded-2xl"
+        style={{ background: "#FFFFFF", border: "1px solid #E8EAED" }}
+      >
+        <div
+          className="flex items-center justify-between px-6 py-4"
+          style={{ borderBottom: "1px solid #F3F4F6" }}
+        >
+          <h2 className="text-sm font-semibold" style={{ color: "#111827" }}>Recent Bookings</h2>
+          <Link href="/admin/bookings" className="flex items-center gap-1 text-xs font-medium" style={{ color: "#F97316" }}>
+            View all <ArrowRight size={12} />
+          </Link>
+        </div>
+        {recent.length === 0 ? (
+          <div className="px-6 py-10 text-center">
+            <p className="text-sm" style={{ color: "#9CA3AF" }}>No bookings yet.</p>
+          </div>
+        ) : (
+          <div className="divide-y" style={{ borderColor: "#F3F4F6" }}>
+            {recent.map((intent) => {
+              const meta = intent.metadata;
+              return (
+                <div key={intent.id} className="flex items-center justify-between px-6 py-4 gap-4">
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium truncate" style={{ color: "#111827" }}>
+                      {meta.name ?? "Unknown"}
+                    </p>
+                    <p className="text-xs truncate" style={{ color: "#6B7280" }}>
+                      {meta.service ?? "—"} · {meta.address ?? "—"}
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 text-right">
+                    <p className="text-sm font-semibold" style={{ color: "#16A34A" }}>
+                      ${(intent.amount / 100).toFixed(2)}
+                    </p>
+                    <p className="text-xs" style={{ color: "#9CA3AF" }}>
+                      {new Date(intent.created * 1000).toLocaleDateString("en-AU")}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

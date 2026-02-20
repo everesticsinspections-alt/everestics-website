@@ -1,0 +1,72 @@
+"use client";
+
+import { useRef, useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
+
+const stats = [
+  { value: 500, suffix: "+", label: "Inspections Completed", description: "Across residential & commercial" },
+  { value: 15, suffix: "+", label: "Years Experience", description: "Industry-leading expertise" },
+  { value: 98, suffix: "%", label: "Client Satisfaction", description: "Based on verified reviews" },
+  { value: 2, suffix: "", label: "Major Locations", description: "Newcastle & Sydney CBD" },
+];
+
+function CountUp({ target, suffix }: { target: number; suffix: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  useEffect(() => {
+    if (!inView) return;
+    const duration = 1800;
+    const steps = 60;
+    const stepTime = duration / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += target / steps;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, stepTime);
+    return () => clearInterval(timer);
+  }, [inView, target]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
+
+export function Stats() {
+  return (
+    <section className="py-20" style={{ background: "#F7F8FA", borderTop: "1px solid #E8EAED", borderBottom: "1px solid #E8EAED" }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="flex flex-col items-center text-center py-8 px-6 rounded-2xl"
+              style={{ background: "#FFFFFF", border: "1px solid #E8EAED", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" as const }}
+            >
+              <div
+                className="text-4xl md:text-5xl font-bold tabular-nums mb-1"
+                style={{ color: i % 2 === 0 ? "#F97316" : "#2563EB" }}
+              >
+                <CountUp target={stat.value} suffix={stat.suffix} />
+              </div>
+              <div className="text-sm font-semibold mb-0.5" style={{ color: "#111827" }}>
+                {stat.label}
+              </div>
+              <div className="text-xs" style={{ color: "#9CA3AF" }}>
+                {stat.description}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

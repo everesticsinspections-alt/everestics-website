@@ -1,0 +1,35 @@
+{
+  "contact": {
+    "phone": "02 0000 0000",
+    "email": "info@everestics.com.au",
+    "address": "Newcastle & Sydney CBD, NSW, Australia"
+  },
+  "businessHours": "Monday – Friday: 7am – 6pm\nSaturday: 8am – 2pm\nSunday: Closed",
+  "tagline": "Independent building inspections for buyers, sellers, and developers across Newcastle and Sydney.",
+  "faqs": [
+    {
+      "question": "How quickly can I get an inspection?",
+      "answer": "We typically schedule inspections within 48–72 hours of booking. For urgent requests, same-day or next-day appointments may be available."
+    },
+    {
+      "question": "What areas do you service?",
+      "answer": "We service Newcastle, the Hunter Valley, and Sydney CBD and surrounds. Contact us if you're unsure whether your property falls within our range."
+    },
+    {
+      "question": "How long does a report take?",
+      "answer": "You'll receive your written report within 24 hours of the inspection, usually on the same day."
+    },
+    {
+      "question": "Are you licensed and insured?",
+      "answer": "Yes. All our inspectors are fully licensed building practitioners and carry professional indemnity and public liability insurance."
+    }
+  ],
+  "serviceAreas": ["Newcastle", "Lake Macquarie", "Maitland", "Hunter Valley", "Sydney CBD", "Inner West", "North Shore"],
+  "team": [
+    {
+      "name": "Principal Inspector",
+      "title": "Licensed Building Inspector",
+      "bio": "Over 15 years of experience in residential and commercial construction."
+    }
+  ]
+}
