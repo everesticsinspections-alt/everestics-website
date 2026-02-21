@@ -3,49 +3,16 @@
 import { motion } from "framer-motion";
 import { Eye, Award, Clock, FileCheck, Shield, HeartHandshake } from "lucide-react";
 
-const features = [
-  {
-    icon: Eye,
-    title: "Independent & Unbiased",
-    description:
-      "We work for you — not the builder, developer, or agent. Our reports are objective, thorough, and always in your interest.",
-    color: "#3B82F6",
-  },
-  {
-    icon: Award,
-    title: "Fully Licensed Inspectors",
-    description:
-      "All inspectors hold current NSW licences and carry professional indemnity insurance. Qualified, accountable, professional.",
-    color: "#F97316",
-  },
-  {
-    icon: Clock,
-    title: "Fast Report Turnaround",
-    description:
-      "Receive your detailed inspection report within 24 hours of the inspection — formatted for easy reading and action.",
-    color: "#3B82F6",
-  },
-  {
-    icon: FileCheck,
-    title: "Detailed, Actionable Reports",
-    description:
-      "No jargon, no fluff. Clear findings, photographic evidence, and specific remediation recommendations.",
-    color: "#F97316",
-  },
-  {
-    icon: Shield,
-    title: "Full Compliance Coverage",
-    description:
-      "We check against current Australian Standards and the National Construction Code so you stay fully compliant.",
-    color: "#3B82F6",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Local Knowledge, Personal Service",
-    description:
-      "Newcastle-based with Sydney CBD coverage. We know the local building landscape and regulations inside out.",
-    color: "#F97316",
-  },
+const ICONS = [Eye, Award, Clock, FileCheck, Shield, HeartHandshake];
+const COLORS = ["#3B82F6", "#F97316", "#3B82F6", "#F97316", "#3B82F6", "#F97316"];
+
+const DEFAULT_FEATURES = [
+  { title: "Independent & Unbiased", description: "We work for you — not the builder, developer, or agent. Our reports are objective, thorough, and always in your interest." },
+  { title: "Fully Licensed Inspectors", description: "All inspectors hold current NSW licences and carry professional indemnity insurance. Qualified, accountable, professional." },
+  { title: "Fast Report Turnaround", description: "Receive your detailed inspection report within 24 hours of the inspection — formatted for easy reading and action." },
+  { title: "Detailed, Actionable Reports", description: "No jargon, no fluff. Clear findings, photographic evidence, and specific remediation recommendations." },
+  { title: "Full Compliance Coverage", description: "We check against current Australian Standards and the National Construction Code so you stay fully compliant." },
+  { title: "Local Knowledge, Personal Service", description: "Newcastle-based with Sydney CBD coverage. We know the local building landscape and regulations inside out." },
 ];
 
 const container = {
@@ -64,7 +31,7 @@ const item = {
   },
 };
 
-export function WhyUs() {
+export function WhyUs({ features = DEFAULT_FEATURES }: { features?: { title: string; description: string }[] }) {
   return (
     <section
       className="py-28 relative overflow-hidden"
@@ -109,8 +76,9 @@ export function WhyUs() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          {features.map((feature) => {
-            const Icon = feature.icon;
+          {features.map((feature, idx) => {
+            const Icon = ICONS[idx % ICONS.length];
+            const color = COLORS[idx % COLORS.length];
             return (
               <motion.div
                 key={feature.title}
@@ -122,15 +90,15 @@ export function WhyUs() {
                   boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                 }}
                 whileHover={{
-                  boxShadow: `0 6px 28px ${feature.color}12`,
-                  borderColor: `${feature.color}30`,
+                  boxShadow: `0 6px 28px ${color}12`,
+                  borderColor: `${color}30`,
                 }}
               >
                 <div
                   className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
-                  style={{ background: `${feature.color}10` }}
+                  style={{ background: `${color}10` }}
                 >
-                  <Icon size={22} style={{ color: feature.color }} />
+                  <Icon size={22} style={{ color }} />
                 </div>
                 <h3
                   className="text-base font-semibold mb-2"

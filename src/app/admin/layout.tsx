@@ -12,11 +12,13 @@ import {
   LogOut,
   Menu,
   X,
+  TrendingUp,
 } from "lucide-react";
 
 const navLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/bookings", label: "Bookings", icon: CalendarCheck, exact: false },
+  { href: "/admin/earnings", label: "Earnings", icon: TrendingUp, exact: false },
   { href: "/admin/quotes", label: "Quotes", icon: Mail, exact: false },
   { href: "/admin/content", label: "Site Content", icon: Settings, exact: false },
 ];

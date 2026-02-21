@@ -14,11 +14,52 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const BASE_URL = "https://www.everestics.com.au";
+
 export const metadata: Metadata = {
-  title: "Everestics | Building Inspections Newcastle & Sydney CBD",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Everestics | Building Inspections Newcastle & Sydney CBD",
+    template: "%s | Everestics",
+  },
   description:
-    "Everestics is a trusted provider of comprehensive building inspection services for residential and commercial properties. Serving Newcastle and Sydney CBD.",
-  keywords: "building inspection, pre-purchase inspection, handover inspection, Newcastle, Sydney, new build inspection, dilapidation report",
+    "Everestics delivers independent, licensed building inspections for buyers, sellers, and developers across Newcastle and Sydney CBD. Reports within 24 hours.",
+  keywords:
+    "building inspection, pre-purchase inspection, handover inspection, Newcastle, Sydney CBD, new build stage inspection, termite pest inspection, licensed inspector NSW",
+  authors: [{ name: "Everestics" }],
+  openGraph: {
+    type: "website",
+    locale: "en_AU",
+    url: BASE_URL,
+    siteName: "Everestics",
+    title: "Everestics | Building Inspections Newcastle & Sydney CBD",
+    description:
+      "Independent, licensed building inspections across Newcastle and Sydney CBD. Clear reports delivered within 24 hours.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Everestics Building Inspections",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Everestics | Building Inspections Newcastle & Sydney CBD",
+    description:
+      "Independent, licensed building inspections across Newcastle and Sydney CBD. Clear reports delivered within 24 hours.",
+    images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

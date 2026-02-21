@@ -1,11 +1,135 @@
 {
   "contact": {
-    "phone": "02 0000 0000",
-    "email": "info@everestics.com.au",
+    "phone": "0451 171 987",
+    "email": "everesticsinspections@gmail.com",
     "address": "Newcastle & Sydney CBD, NSW, Australia"
   },
-  "businessHours": "Monday – Friday: 7am – 6pm\nSaturday: 8am – 2pm\nSunday: Closed",
+  "businessHours": "Monday – Saturday: 9am – 6pm\nSunday: Closed",
   "tagline": "Independent building inspections for buyers, sellers, and developers across Newcastle and Sydney.",
+  "hero": {
+    "headline": "Building Inspections You Can Trust.",
+    "subheadline": "Everestics delivers clear, accurate, and actionable insights for homeowners, buyers, sellers, and investors — backed by technical expertise and personal service."
+  },
+  "about": {
+    "storyP1": "Everestics started in Newcastle with a team of licensed inspectors and a belief that the industry needed more transparency. Too many buyers were settling on properties with hidden problems. Too many builds were passing inspection with defects that would cost thousands to fix later.",
+    "storyP2": "We set out to change that. Today we serve clients across Newcastle, the Hunter Valley, and Sydney CBD — delivering the same rigorous, independent reports we started with, backed by the most current Australian Standards and the National Construction Code."
+  },
+  "whyUs": [
+    {
+      "title": "Independent & Unbiased",
+      "description": "We work for you — not the builder, developer, or agent. Our reports are objective, thorough, and always in your interest."
+    },
+    {
+      "title": "Fully Licensed Inspectors",
+      "description": "All inspectors hold current NSW licences and carry professional indemnity insurance. Qualified, accountable, professional."
+    },
+    {
+      "title": "Fast Report Turnaround",
+      "description": "Receive your detailed inspection report within 24 hours of the inspection — formatted for easy reading and action."
+    },
+    {
+      "title": "Detailed, Actionable Reports",
+      "description": "No jargon, no fluff. Clear findings, photographic evidence, and specific remediation recommendations."
+    },
+    {
+      "title": "Full Compliance Coverage",
+      "description": "We check against current Australian Standards and the National Construction Code so you stay fully compliant."
+    },
+    {
+      "title": "Local Knowledge, Personal Service",
+      "description": "Newcastle-based with Sydney CBD coverage. We know the local building landscape and regulations inside out."
+    }
+  ],
+  "services": [
+    {
+      "id": "pre-purchase",
+      "title": "Pre-Purchase Property Inspections",
+      "tagline": "Buy with confidence.",
+      "description": "Before you sign anything, know exactly what you're getting. Our pre-purchase inspections identify structural issues, safety risks, hidden defects, and any evidence of non-compliant work — so you can negotiate from strength or walk away informed.",
+      "includes": [
+        "Full structural assessment",
+        "Roof, subfloor and wall cavity inspection",
+        "Identification of safety hazards",
+        "Photo-rich written report within 24 hours",
+        "Plain-language findings you can act on"
+      ],
+      "audience": "Buyers",
+      "popular": true
+    },
+    {
+      "id": "pre-sale",
+      "title": "Pre-Sale Inspections",
+      "tagline": "Control your sale from the start.",
+      "description": "Understand your property's condition before you list it. Identifying issues early lets you address them proactively, price accurately, and present buyers with confidence — removing uncertainty from both sides of the negotiation.",
+      "includes": [
+        "Complete property condition assessment",
+        "Identification of defects and maintenance needs",
+        "Documentation to share with prospective buyers",
+        "Recommendations for cost-effective remediation"
+      ],
+      "audience": "Sellers",
+      "popular": false
+    },
+    {
+      "id": "building",
+      "title": "Building Inspections",
+      "tagline": "The full picture on any property.",
+      "description": "A thorough examination of any residential or commercial building. We assess structural integrity, safety compliance, and maintenance requirements — giving you a clear, complete view of the property's condition.",
+      "includes": [
+        "Structural and safety assessment",
+        "Internal and external condition review",
+        "Essential maintenance identification",
+        "Compliance review against Australian Standards",
+        "Detailed photographic evidence"
+      ],
+      "audience": "Owners & Investors",
+      "popular": false
+    },
+    {
+      "id": "new-build",
+      "title": "New Build Stage Inspections",
+      "tagline": "Independent eyes at every stage.",
+      "description": "Don't rely solely on the builder's own sign-off. Our stage inspections provide independent assessment at key construction milestones — checking workmanship, structural elements, finishes, and compliance before the next phase begins.",
+      "includes": [
+        "Pre-slab / foundation stage",
+        "Frame stage inspection",
+        "Lock-up stage inspection",
+        "Fixing stage inspection",
+        "Practical completion review"
+      ],
+      "audience": "Developers & Buyers",
+      "popular": false
+    },
+    {
+      "id": "handover",
+      "title": "Handover Inspections",
+      "tagline": "Don't take possession of someone else's problem.",
+      "description": "Your final opportunity to identify defects before occupancy. We document every issue thoroughly so your builder is legally required to correct them — protecting your investment from day one.",
+      "includes": [
+        "Comprehensive pre-occupancy inspection",
+        "Defect documentation with photographic evidence",
+        "Formal defect list for builder rectification",
+        "Follow-up inspection available after repairs"
+      ],
+      "audience": "New Home Buyers",
+      "popular": false
+    },
+    {
+      "id": "termite-pest",
+      "title": "Termite & Pest Inspections",
+      "tagline": "Don't let hidden invaders cost you thousands.",
+      "description": "Termites and pests can cause significant structural damage that's invisible to the untrained eye. Our thorough pest inspections identify active infestations, past damage, and high-risk conditions — giving you the information you need before buying, selling, or maintaining a property.",
+      "includes": [
+        "Full internal and external pest inspection",
+        "Identification of active infestations",
+        "Assessment of past termite damage",
+        "High-risk area documentation with photos",
+        "Written report with treatment recommendations"
+      ],
+      "audience": "Buyers & Owners",
+      "popular": false
+    }
+  ],
   "faqs": [
     {
       "question": "How quickly can I get an inspection?",
@@ -24,12 +148,5 @@
       "answer": "Yes. All our inspectors are fully licensed building practitioners and carry professional indemnity and public liability insurance."
     }
   ],
-  "serviceAreas": ["Newcastle", "Lake Macquarie", "Maitland", "Hunter Valley", "Sydney CBD", "Inner West", "North Shore"],
-  "team": [
-    {
-      "name": "Principal Inspector",
-      "title": "Licensed Building Inspector",
-      "bio": "Over 15 years of experience in residential and commercial construction."
-    }
-  ]
+  "serviceAreas": ["Newcastle", "Lake Macquarie", "Maitland", "Hunter Valley", "Sydney CBD", "Inner West", "North Shore"]
 }

@@ -7,7 +7,7 @@ const services = [
   "Building Inspections",
   "New Build Inspections",
   "Handover Inspections",
-  "Dilapidation Reports",
+  "Termite & Pest Inspections",
 ];
 
 const company = [
@@ -49,20 +49,20 @@ export function Footer() {
             </p>
             <div className="flex flex-col gap-3">
               <a
-                href="tel:+61200000000"
+                href="tel:0451171987"
                 className="flex items-center gap-2 text-sm transition-colors hover:text-brand-orange"
                 style={{ color: "#9CA3AF" }}
               >
                 <Phone size={14} style={{ color: "#F97316" }} />
-                02 0000 0000
+                0451 171 987
               </a>
               <a
-                href="mailto:hello@everestics.com.au"
+                href="mailto:everesticsinspections@gmail.com"
                 className="flex items-center gap-2 text-sm transition-colors"
                 style={{ color: "#9CA3AF" }}
               >
                 <Mail size={14} style={{ color: "#F97316" }} />
-                hello@everestics.com.au
+                everesticsinspections@gmail.com
               </a>
             </div>
           </div>
@@ -162,9 +162,14 @@ export function Footer() {
           <p className="text-xs" style={{ color: "#4B5563" }}>
             © {new Date().getFullYear()} Everestics Pty Ltd. All rights reserved.
           </p>
-          <p className="text-xs" style={{ color: "#4B5563" }}>
-            Newcastle &amp; Sydney CBD · ABN 00 000 000 000
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="text-xs" style={{ color: "#4B5563" }}>
+              Newcastle &amp; Sydney CBD
+            </p>
+            <Link href="/privacy" className="text-xs transition-colors hover:opacity-80" style={{ color: "#4B5563" }}>
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

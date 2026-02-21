@@ -4,10 +4,10 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { value: 500, suffix: "+", label: "Inspections Completed", description: "Across residential & commercial" },
-  { value: 15, suffix: "+", label: "Years Experience", description: "Industry-leading expertise" },
-  { value: 98, suffix: "%", label: "Client Satisfaction", description: "Based on verified reviews" },
-  { value: 2, suffix: "", label: "Major Locations", description: "Newcastle & Sydney CBD" },
+  { value: 24, suffix: "hr", label: "Report Turnaround", description: "Delivered same or next day" },
+  { value: 6, suffix: "", label: "Inspection Types", description: "Residential & commercial" },
+  { value: 2, suffix: "", label: "Service Regions", description: "Newcastle & Sydney CBD" },
+  { value: 6, suffix: " days", label: "Available", description: "Monday to Saturday" },
 ];
 
 function CountUp({ target, suffix }: { target: number; suffix: string }) {

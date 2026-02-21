@@ -23,7 +23,13 @@ const HERO_PHOTOS = [
   },
 ];
 
-export function Hero() {
+export function Hero({
+  headline = "Building Inspections You Can Trust.",
+  subheadline = "Everestics delivers clear, accurate, and actionable insights for homeowners, buyers, sellers, and investors — backed by technical expertise and personal service.",
+}: {
+  headline?: string;
+  subheadline?: string;
+}) {
   return (
     <section
       className="relative min-h-screen flex items-center overflow-hidden blueprint-grid"
@@ -69,8 +75,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.08, ease }}
           >
-            Building Inspections{" "}
-            <span className="gradient-text-orange">You Can Trust.</span>
+            {headline}
           </motion.h1>
 
           {/* Subheading */}
@@ -81,8 +86,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18, ease }}
           >
-            Everestics delivers clear, accurate, and actionable insights for homeowners,
-            buyers, sellers, and investors — backed by technical expertise and personal service.
+            {subheadline}
           </motion.p>
 
           {/* CTAs */}
@@ -120,9 +124,9 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.38, ease }}
           >
             {[
-              { value: "500+", label: "Inspections" },
-              { value: "15+", label: "Years Exp." },
-              { value: "98%", label: "Satisfaction" },
+              { value: "24hr", label: "Reports" },
+              { value: "6", label: "Services" },
+              { value: "Licensed", label: "& Insured" },
             ].map((stat, i) => (
               <div
                 key={stat.label}

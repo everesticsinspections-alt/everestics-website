@@ -3,14 +3,16 @@ import { ServicesGrid } from "@/components/home/ServicesGrid";
 import { Stats } from "@/components/home/Stats";
 import { WhyUs } from "@/components/home/WhyUs";
 import { CTASection } from "@/components/home/CTASection";
+import { getContent } from "@/lib/content";
 
 export default function Home() {
+  const content = getContent();
   return (
     <>
-      <Hero />
+      <Hero headline={content.hero.headline} subheadline={content.hero.subheadline} />
       <Stats />
-      <ServicesGrid />
-      <WhyUs />
+      <ServicesGrid services={content.services} />
+      <WhyUs features={content.whyUs} />
       <CTASection />
     </>
   );

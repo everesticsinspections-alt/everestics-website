@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -35,7 +36,7 @@ const SERVICES = [
   { id: "building", label: "Building Inspection", icon: Building2 },
   { id: "new-build", label: "New Build Stage Inspection", icon: HardHat },
   { id: "handover", label: "Handover Inspection", icon: ClipboardCheck },
-  { id: "dilapidation", label: "Dilapidation Report", icon: FileText },
+  { id: "termite-pest", label: "Termite & Pest Inspection", icon: FileText },
 ];
 
 const STEPS = ["Service & Price", "Property", "Your Details", "Payment", "Done"];
@@ -213,8 +214,23 @@ function PaymentForm({
 // ─── Main booking page ────────────────────────────────────────────────────────
 
 export default function BookPage() {
+  return (
+    <Suspense>
+      <BookPageContent />
+    </Suspense>
+  );
+}
+
+function BookPageContent() {
+  const searchParams = useSearchParams();
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
+
+  // Quote token state
+  const [quoteToken, setQuoteToken] = useState<string | null>(null);
+  const [quoteError, setQuoteError] = useState("");
+  const [quoteLoading, setQuoteLoading] = useState(false);
+  const [amountLocked, setAmountLocked] = useState(false);
 
   // Form data
   const [service, setService] = useState("");
@@ -233,6 +249,30 @@ export default function BookPage() {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [creatingIntent, setCreatingIntent] = useState(false);
   const [intentError, setIntentError] = useState("");
+
+  // On mount: check for ?quote= token and validate it
+  useEffect(() => {
+    const token = searchParams.get("quote");
+    if (!token) return;
+    setQuoteToken(token);
+    setQuoteLoading(true);
+    fetch(`/api/validate-quote?token=${encodeURIComponent(token)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.error) {
+          setQuoteError(data.error);
+        } else {
+          setName(data.name ?? "");
+          setEmail(data.email ?? "");
+          setService(data.service ?? "");
+          setQuotedAmount(String(data.amountAud));
+          setAmountLocked(true);
+        }
+      })
+      .catch(() => setQuoteError("Could not validate quote link. Please contact us."))
+      .finally(() => setQuoteLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function go(d: number) {
     setDirection(d);
@@ -338,6 +378,41 @@ export default function BookPage() {
 
       {/* Form card */}
       <div className="max-w-xl mx-auto px-4 py-12">
+
+        {/* Quote token status banners */}
+        {quoteLoading && (
+          <div
+            className="flex items-center gap-3 rounded-2xl p-4 mb-4"
+            style={{ background: "#F7F8FA", border: "1px solid #E8EAED" }}
+          >
+            <Loader2 size={16} className="animate-spin flex-shrink-0" style={{ color: "#F97316" }} />
+            <p className="text-sm" style={{ color: "#6B7280" }}>Validating your quote link…</p>
+          </div>
+        )}
+
+        {quoteError && (
+          <div
+            className="rounded-2xl p-4 mb-4"
+            style={{ background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.2)" }}
+          >
+            <p className="text-sm font-semibold mb-1" style={{ color: "#DC2626" }}>Quote link invalid</p>
+            <p className="text-sm" style={{ color: "#6B7280" }}>{quoteError}</p>
+          </div>
+        )}
+
+        {amountLocked && !quoteError && (
+          <div
+            className="flex items-center gap-3 rounded-2xl p-4 mb-4"
+            style={{ background: "rgba(22,163,74,0.06)", border: "1px solid rgba(22,163,74,0.2)" }}
+          >
+            <CheckCircle2 size={16} style={{ color: "#16A34A", flexShrink: 0 }} />
+            <p className="text-sm" style={{ color: "#374151" }}>
+              Your quote has been pre-filled. The amount is locked to{" "}
+              <strong style={{ color: "#16A34A" }}>${parseFloat(quotedAmount).toFixed(2)} AUD</strong>.
+            </p>
+          </div>
+        )}
+
         <div
           className="rounded-2xl p-8 md:p-10"
           style={{ background: "#FFFFFF", border: "1px solid #E8EAED", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" }}
@@ -359,7 +434,9 @@ export default function BookPage() {
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 >
                   <h2 className="text-lg font-bold mb-1" style={{ color: "#111827" }}>Select your service</h2>
-                  <p className="text-sm mb-6" style={{ color: "#6B7280" }}>Choose the inspection you were quoted for.</p>
+                  <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
+                    {amountLocked ? "Service pre-filled from your quote." : "Choose the inspection you were quoted for."}
+                  </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                     {SERVICES.map((s) => {
@@ -368,11 +445,14 @@ export default function BookPage() {
                       return (
                         <button
                           key={s.id}
-                          onClick={() => setService(s.id)}
+                          onClick={() => !amountLocked && setService(s.id)}
+                          disabled={amountLocked && !sel}
                           className="flex items-center gap-3 p-3.5 rounded-xl text-left transition-all"
                           style={{
                             background: sel ? "rgba(249,115,22,0.06)" : "#F9FAFB",
                             border: sel ? "1px solid rgba(249,115,22,0.4)" : "1px solid #E8EAED",
+                            opacity: amountLocked && !sel ? 0.4 : 1,
+                            cursor: amountLocked ? "default" : "pointer",
                           }}
                         >
                           <div
@@ -392,29 +472,46 @@ export default function BookPage() {
                   {/* Quoted amount */}
                   <div className="mb-6">
                     <label className="block text-xs font-medium mb-2" style={{ color: "#6B7280" }}>
-                      Your quoted price (AUD) *
+                      {amountLocked ? "Quoted Price (AUD) — locked" : "Your quoted price (AUD) *"}
                     </label>
-                    <div className="relative">
-                      <DollarSign
-                        size={15}
-                        className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                        style={{ color: "#9CA3AF" }}
-                      />
-                      <input
-                        type="number"
-                        min="50"
-                        max="10000"
-                        step="0.01"
-                        placeholder="e.g. 450.00"
-                        value={quotedAmount}
-                        onChange={(e) => { setQuotedAmount(e.target.value); setAmountError(""); }}
-                        style={{ ...inputStyle(!!amountError), paddingLeft: "2.25rem" }}
-                      />
-                    </div>
-                    <FieldError msg={amountError} />
-                    <p className="text-xs mt-1.5" style={{ color: "#9CA3AF" }}>
-                      Enter the exact amount from your Everestics quote.
-                    </p>
+                    {amountLocked ? (
+                      <div
+                        className="flex items-center gap-2 rounded-xl px-4 py-3"
+                        style={{ background: "rgba(22,163,74,0.06)", border: "1px solid rgba(22,163,74,0.2)" }}
+                      >
+                        <DollarSign size={15} style={{ color: "#16A34A" }} />
+                        <span className="text-base font-bold" style={{ color: "#16A34A" }}>
+                          {parseFloat(quotedAmount).toFixed(2)} AUD
+                        </span>
+                        <span className="ml-auto text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "rgba(22,163,74,0.1)", color: "#16A34A" }}>
+                          Locked
+                        </span>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="relative">
+                          <DollarSign
+                            size={15}
+                            className="absolute left-3.5 top-1/2 -translate-y-1/2"
+                            style={{ color: "#9CA3AF" }}
+                          />
+                          <input
+                            type="number"
+                            min="50"
+                            max="10000"
+                            step="0.01"
+                            placeholder="e.g. 450.00"
+                            value={quotedAmount}
+                            onChange={(e) => { setQuotedAmount(e.target.value); setAmountError(""); }}
+                            style={{ ...inputStyle(!!amountError), paddingLeft: "2.25rem" }}
+                          />
+                        </div>
+                        <FieldError msg={amountError} />
+                        <p className="text-xs mt-1.5" style={{ color: "#9CA3AF" }}>
+                          Enter the exact amount from your Everestics quote.
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <button

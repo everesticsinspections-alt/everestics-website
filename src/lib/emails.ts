@@ -263,6 +263,57 @@ export function bookingAlertEmail(data: {
   };
 }
 
+// ─── 5. Customer: Quote offer with payment link ───────────────────────────────
+
+export function quoteOfferEmail(data: {
+  name: string;
+  service: string;
+  amountAud: number;
+  paymentLink: string;
+}) {
+  const formatted = new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD" }).format(data.amountAud);
+  const body = `
+    <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#111827;">
+      Your quote is ready, ${data.name.split(" ")[0]}!
+    </h2>
+    <p style="margin:0 0 20px;font-size:14px;color:#6B7280;line-height:1.6;">
+      We've prepared a quote for your upcoming inspection. Review the details below and click the button to pay and lock in your date.
+    </p>
+
+    <div style="background:rgba(249,115,22,0.05);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:20px 24px;margin-bottom:24px;">
+      <p style="margin:0 0 4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#EA580C;">Your Quote</p>
+      <p style="margin:0 0 4px;font-size:15px;color:#111827;font-weight:600;">${data.service}</p>
+      <p style="margin:0;font-size:28px;font-weight:800;color:#F97316;">${formatted} AUD</p>
+    </div>
+
+    <a href="${data.paymentLink}"
+       style="display:block;text-align:center;background:linear-gradient(135deg,#F97316,#EA580C);color:#FFFFFF;font-size:15px;font-weight:700;padding:16px 32px;border-radius:12px;text-decoration:none;margin-bottom:20px;">
+      Pay &amp; Book Now →
+    </a>
+
+    <p style="margin:0 0 8px;font-size:12px;color:#9CA3AF;text-align:center;">
+      This quote link expires in <strong style="color:#6B7280;">7 days</strong>. The amount is fixed and cannot be changed.
+    </p>
+
+    <table width="100%" style="margin-top:16px;background:#F7F8FA;border:1px solid #E8EAED;border-radius:12px;">
+      <tr>
+        <td style="padding:12px 16px;font-size:12px;color:#6B7280;">What happens next</td>
+      </tr>
+      ${["Complete payment using the button above", "We contact you within 4 hours to confirm your inspection date and time", "Receive your detailed report within 24 hours of the inspection"].map((step, i) => `
+      <tr>
+        <td style="padding:6px 16px 6px 20px;font-size:13px;color:#374151;">
+          <span style="color:#F97316;font-weight:700;">${i + 1}.</span> ${step}
+        </td>
+      </tr>`).join("")}
+      <tr><td style="padding:8px 0;"></td></tr>
+    </table>
+  `;
+  return {
+    subject: `Your Everestics inspection quote — ${formatted} AUD`,
+    html: layout("Your Quote — Everestics", body),
+  };
+}
+
 // ─── Send helpers ─────────────────────────────────────────────────────────────
 
 export async function sendQuoteEmails(data: {
@@ -283,6 +334,18 @@ export async function sendQuoteEmails(data: {
     transporter.sendMail({ from, to: data.email, ...customer }),
     ...(OWNER_EMAIL ? [transporter.sendMail({ from, to: OWNER_EMAIL, ...owner })] : []),
   ]);
+}
+
+export async function sendQuoteOffer(data: {
+  name: string;
+  email: string;
+  service: string;
+  amountAud: number;
+  paymentLink: string;
+}) {
+  const { transporter, from } = getTransport();
+  const email = quoteOfferEmail(data);
+  await transporter.sendMail({ from, to: data.email, ...email });
 }
 
 export async function sendBookingEmails(data: {
