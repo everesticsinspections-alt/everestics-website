@@ -8,7 +8,7 @@ export function CTASection() {
   return (
     <section
       className="relative py-28 overflow-hidden"
-      style={{ background: "#111827" }}
+      style={{ background: "#1B2E5C" }}
     >
       {/* Subtle warm glow top */}
       <div

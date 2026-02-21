@@ -121,7 +121,7 @@ export default async function EarningsPage({
       {/* Header */}
       <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold" style={{ color: "#111827" }}>Earnings</h1>
+          <h1 className="text-2xl font-bold" style={{ color: "#1B2E5C" }}>Earnings</h1>
           <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
             Revenue breakdown · {periodLabel(period)}
           </p>
@@ -163,7 +163,7 @@ export default async function EarningsPage({
               >
                 <Icon size={18} style={{ color: card.color }} />
               </div>
-              <p className="text-2xl font-bold mb-0.5" style={{ color: "#111827" }}>{card.value}</p>
+              <p className="text-2xl font-bold mb-0.5" style={{ color: "#1B2E5C" }}>{card.value}</p>
               <p className="text-xs" style={{ color: "#6B7280" }}>{card.label}</p>
             </div>
           );
@@ -177,13 +177,13 @@ export default async function EarningsPage({
           style={{ background: "#FFFFFF", border: "1px solid #E8EAED" }}
         >
           <div className="px-6 py-4" style={{ borderBottom: "1px solid #F3F4F6" }}>
-            <h2 className="text-sm font-semibold" style={{ color: "#111827" }}>By Service</h2>
+            <h2 className="text-sm font-semibold" style={{ color: "#1B2E5C" }}>By Service</h2>
           </div>
           <div className="divide-y" style={{ borderColor: "#F3F4F6" }}>
             {byService.map((s) => (
               <div key={s.name} className="flex items-center justify-between px-6 py-3 gap-4">
                 <div className="min-w-0">
-                  <p className="text-sm font-medium truncate" style={{ color: "#111827" }}>{s.name}</p>
+                  <p className="text-sm font-medium truncate" style={{ color: "#1B2E5C" }}>{s.name}</p>
                   <p className="text-xs" style={{ color: "#9CA3AF" }}>{s.count} booking{s.count !== 1 ? "s" : ""}</p>
                 </div>
                 <p className="text-sm font-semibold flex-shrink-0" style={{ color: "#16A34A" }}>
@@ -201,7 +201,7 @@ export default async function EarningsPage({
         style={{ background: "#FFFFFF", border: "1px solid #E8EAED" }}
       >
         <div className="px-6 py-4" style={{ borderBottom: "1px solid #F3F4F6" }}>
-          <h2 className="text-sm font-semibold" style={{ color: "#111827" }}>All Transactions</h2>
+          <h2 className="text-sm font-semibold" style={{ color: "#1B2E5C" }}>All Transactions</h2>
         </div>
 
         {rows.length === 0 ? (
@@ -231,7 +231,7 @@ export default async function EarningsPage({
                       {row.date}
                     </td>
                     <td className="px-6 py-4 min-w-0">
-                      <p className="font-medium truncate max-w-[140px]" style={{ color: "#111827" }}>{row.customer}</p>
+                      <p className="font-medium truncate max-w-[140px]" style={{ color: "#1B2E5C" }}>{row.customer}</p>
                       <p className="text-xs truncate max-w-[140px]" style={{ color: "#9CA3AF" }}>{row.email}</p>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-xs" style={{ color: "#6B7280" }}>

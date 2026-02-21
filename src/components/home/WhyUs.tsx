@@ -58,7 +58,7 @@ export function WhyUs({ features = DEFAULT_FEATURES }: { features?: { title: str
           </div>
           <h2
             className="text-4xl md:text-5xl font-bold leading-tight mb-4"
-            style={{ color: "#111827" }}
+            style={{ color: "#1B2E5C" }}
           >
             The standard others{" "}
             <span className="gradient-text-blue">should be held to.</span>
@@ -102,7 +102,7 @@ export function WhyUs({ features = DEFAULT_FEATURES }: { features?: { title: str
                 </div>
                 <h3
                   className="text-base font-semibold mb-2"
-                  style={{ color: "#111827" }}
+                  style={{ color: "#1B2E5C" }}
                 >
                   {feature.title}
                 </h3>

@@ -70,7 +70,7 @@ export function Hero({
           {/* Headline */}
           <motion.h1
             className="text-5xl md:text-6xl font-bold leading-tight tracking-tight"
-            style={{ color: "#111827" }}
+            style={{ color: "#1B2E5C" }}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.08, ease }}
@@ -222,7 +222,7 @@ export function Hero({
               <ShieldCheck size={18} style={{ color: "#F97316" }} />
             </div>
             <div>
-              <p className="text-xs font-bold" style={{ color: "#111827" }}>Fully Licensed</p>
+              <p className="text-xs font-bold" style={{ color: "#1B2E5C" }}>Fully Licensed</p>
               <p className="text-xs" style={{ color: "#9CA3AF" }}>& Insured Inspector</p>
             </div>
           </motion.div>
@@ -245,7 +245,7 @@ export function Hero({
                 <Star key={i} size={11} fill="#F97316" style={{ color: "#F97316" }} />
               ))}
             </div>
-            <p className="text-xs font-semibold" style={{ color: "#111827" }}>
+            <p className="text-xs font-semibold" style={{ color: "#1B2E5C" }}>
               &ldquo;Thorough and professional&rdquo;
             </p>
             <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>— Newcastle client</p>

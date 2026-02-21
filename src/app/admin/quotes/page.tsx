@@ -30,7 +30,7 @@ function inputStyle(hasError?: boolean): React.CSSProperties {
   return {
     background: "#FFFFFF",
     border: `1px solid ${hasError ? "#EF4444" : "#E8EAED"}`,
-    color: "#111827",
+    color: "#1B2E5C",
     borderRadius: "0.75rem",
     padding: "0.75rem 1rem",
     width: "100%",
@@ -92,7 +92,7 @@ export default function QuotesPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold" style={{ color: "#111827" }}>Quotes</h1>
+        <h1 className="text-2xl font-bold" style={{ color: "#1B2E5C" }}>Quotes</h1>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
           Send a secure payment link to a customer, or review how quote requests work.
         </p>
@@ -111,7 +111,7 @@ export default function QuotesPage() {
             <Send size={18} className="text-white" />
           </div>
           <div>
-            <h2 className="text-base font-semibold" style={{ color: "#111827" }}>Send a Quote</h2>
+            <h2 className="text-base font-semibold" style={{ color: "#1B2E5C" }}>Send a Quote</h2>
             <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>
               The customer receives a secure link with a locked payment amount — they can&apos;t change the price.
             </p>
@@ -126,7 +126,7 @@ export default function QuotesPage() {
             >
               <CheckCircle2 size={18} style={{ color: "#16A34A", flexShrink: 0, marginTop: "1px" }} />
               <div>
-                <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>Quote email sent!</p>
+                <p className="text-sm font-semibold mb-1" style={{ color: "#1B2E5C" }}>Quote email sent!</p>
                 <p className="text-xs" style={{ color: "#6B7280" }}>
                   The customer received a branded email with a Pay &amp; Book button. The link expires in 7 days.
                 </p>
@@ -198,7 +198,7 @@ export default function QuotesPage() {
                       style={{
                         background: sel ? "rgba(249,115,22,0.06)" : "#F9FAFB",
                         border: sel ? "1px solid rgba(249,115,22,0.35)" : "1px solid #E8EAED",
-                        color: sel ? "#111827" : "#6B7280",
+                        color: sel ? "#1B2E5C" : "#6B7280",
                       }}
                     >
                       <Icon size={13} style={{ color: sel ? "#F97316" : "#9CA3AF", flexShrink: 0 }} />
@@ -270,7 +270,7 @@ export default function QuotesPage() {
             <Mail size={18} style={{ color: "#F97316" }} />
           </div>
           <div>
-            <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#1B2E5C" }}>
               How quote requests from the website work
             </p>
             <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
@@ -317,7 +317,7 @@ export default function QuotesPage() {
       <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E8EAED" }}>
         <div className="flex items-center gap-2 mb-4">
           <InboxIcon size={16} style={{ color: "#9CA3AF" }} />
-          <h3 className="text-sm font-semibold" style={{ color: "#111827" }}>Quick Access</h3>
+          <h3 className="text-sm font-semibold" style={{ color: "#1B2E5C" }}>Quick Access</h3>
         </div>
         <a
           href="mailto:"
@@ -325,7 +325,7 @@ export default function QuotesPage() {
           style={{ background: "#F7F8FA", border: "1px solid #E8EAED" }}
         >
           <div>
-            <p className="text-sm font-medium" style={{ color: "#111827" }}>Open your email inbox</p>
+            <p className="text-sm font-medium" style={{ color: "#1B2E5C" }}>Open your email inbox</p>
             <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>Quote alert emails are delivered directly to your configured owner email</p>
           </div>
           <ExternalLink size={14} style={{ color: "#9CA3AF", flexShrink: 0 }} />

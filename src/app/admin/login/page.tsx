@@ -54,14 +54,14 @@ function LoginForm() {
             <HardHat size={18} className="text-white" />
           </div>
           <div>
-            <p className="text-sm font-bold tracking-widest uppercase" style={{ color: "#111827" }}>
+            <p className="text-sm font-bold tracking-widest uppercase" style={{ color: "#1B2E5C" }}>
               Ever<span style={{ color: "#F97316" }}>estics</span>
             </p>
             <p className="text-xs" style={{ color: "#9CA3AF" }}>Admin Portal</p>
           </div>
         </div>
 
-        <h1 className="text-xl font-bold mb-1" style={{ color: "#111827" }}>Sign in</h1>
+        <h1 className="text-xl font-bold mb-1" style={{ color: "#1B2E5C" }}>Sign in</h1>
         <p className="text-sm mb-6" style={{ color: "#6B7280" }}>Enter your admin password to continue.</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -75,7 +75,7 @@ function LoginForm() {
               style={{
                 background: "#FFFFFF",
                 border: `1px solid ${error ? "#EF4444" : "#E8EAED"}`,
-                color: "#111827",
+                color: "#1B2E5C",
                 borderRadius: "0.75rem",
                 padding: "0.875rem 3rem 0.875rem 1rem",
                 width: "100%",

@@ -40,7 +40,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const Sidebar = () => (
     <aside
       className="flex flex-col h-full"
-      style={{ background: "#111827", borderRight: "1px solid rgba(255,255,255,0.06)" }}
+      style={{ background: "#1B2E5C", borderRight: "1px solid rgba(255,255,255,0.06)" }}
     >
       {/* Logo */}
       <div className="flex items-center gap-2.5 px-6 py-5" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
@@ -122,7 +122,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Mobile topbar */}
         <div
           className="md:hidden flex items-center justify-between px-4 py-3 sticky top-0 z-20"
-          style={{ background: "#111827", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "#1B2E5C", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
         >
           <div className="flex items-center gap-2">
             <div

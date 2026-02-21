@@ -57,7 +57,7 @@ export function Stats() {
               >
                 <CountUp target={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-sm font-semibold mb-0.5" style={{ color: "#111827" }}>
+              <div className="text-sm font-semibold mb-0.5" style={{ color: "#1B2E5C" }}>
                 {stat.label}
               </div>
               <div className="text-xs" style={{ color: "#9CA3AF" }}>

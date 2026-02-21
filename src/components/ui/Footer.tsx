@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { HardHat, MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 
 const services = [
   "Pre-Purchase Property Inspections",
@@ -21,7 +22,7 @@ export function Footer() {
   return (
     <footer
       className="relative overflow-hidden blueprint-grid"
-      style={{ background: "#080C17", borderTop: "1px solid rgba(255,255,255,0.05)" }}
+      style={{ background: "#0A1628", borderTop: "1px solid rgba(255,255,255,0.05)" }}
     >
       {/* Ambient glow */}
       <div
@@ -33,16 +34,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-4">
-              <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, #F97316, #EA580C)" }}
-              >
-                <HardHat size={18} className="text-white" />
+            <Link href="/" className="inline-flex mb-4">
+              <div className="rounded-lg overflow-hidden" style={{ background: "#FFFFFF", padding: "4px 10px" }}>
+                <Image src="/og-image.png" alt="Everestics" width={110} height={40} style={{ objectFit: "contain", display: "block" }} />
               </div>
-              <span className="text-lg font-bold tracking-widest uppercase" style={{ color: "#F9FAFB" }}>
-                Ever<span style={{ color: "#F97316" }}>estics</span>
-              </span>
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               A trusted provider of comprehensive building inspection services for residential and commercial properties. Newcastle &amp; Sydney CBD.

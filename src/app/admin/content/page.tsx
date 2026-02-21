@@ -29,7 +29,7 @@ function inputStyle(full = false): React.CSSProperties {
   return {
     background: "#FFFFFF",
     border: "1px solid #E8EAED",
-    color: "#111827",
+    color: "#1B2E5C",
     borderRadius: "0.75rem",
     padding: "0.75rem 1rem",
     width: full ? "100%" : undefined,
@@ -58,7 +58,7 @@ function SectionCard({
         onClick={() => collapsible && setOpen((v) => !v)}
       >
         <div>
-          <h3 className="text-sm font-semibold" style={{ color: "#111827" }}>{title}</h3>
+          <h3 className="text-sm font-semibold" style={{ color: "#1B2E5C" }}>{title}</h3>
           {subtitle && <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>{subtitle}</p>}
         </div>
         {collapsible && (
@@ -212,7 +212,7 @@ export default function ContentPage() {
     <div>
       <div className="flex items-center justify-between mb-8 gap-4">
         <div>
-          <h1 className="text-2xl font-bold" style={{ color: "#111827" }}>Site Content</h1>
+          <h1 className="text-2xl font-bold" style={{ color: "#1B2E5C" }}>Site Content</h1>
           <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
             Edit all text across your website — changes apply instantly.
           </p>

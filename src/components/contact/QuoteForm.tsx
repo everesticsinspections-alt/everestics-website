@@ -103,7 +103,7 @@ function inputStyle(hasError?: boolean) {
   return {
     background: "#FFFFFF",
     border: `1px solid ${hasError ? "#EF444460" : "#E8EAED"}`,
-    color: "#111827",
+    color: "#1B2E5C",
     borderRadius: "0.75rem",
     padding: "0.875rem 1rem",
     width: "100%",
@@ -190,7 +190,7 @@ export function QuoteForm() {
               exit="exit"
               transition={{ duration: 0.35, ease: "easeOut" as const }}
             >
-              <h3 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
+              <h3 className="text-xl font-bold mb-2" style={{ color: "#1B2E5C" }}>
                 Which inspection do you need?
               </h3>
               <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
@@ -221,7 +221,7 @@ export function QuoteForm() {
                       </div>
                       <span
                         className="text-sm font-medium"
-                        style={{ color: selected ? "#111827" : "#6B7280" }}
+                        style={{ color: selected ? "#1B2E5C" : "#6B7280" }}
                       >
                         {s.label}
                       </span>
@@ -254,7 +254,7 @@ export function QuoteForm() {
               exit="exit"
               transition={{ duration: 0.35, ease: "easeOut" as const }}
             >
-              <h3 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
+              <h3 className="text-xl font-bold mb-2" style={{ color: "#1B2E5C" }}>
                 Tell us about the property
               </h3>
               <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
@@ -298,7 +298,7 @@ export function QuoteForm() {
                               ? "1px solid rgba(249,115,22,0.35)"
                               : "1px solid #E8EAED",
                           color:
-                            step2Form.watch("propertyType") === type ? "#111827" : "#6B7280",
+                            step2Form.watch("propertyType") === type ? "#1B2E5C" : "#6B7280",
                         }}
                       >
                         <input
@@ -365,7 +365,7 @@ export function QuoteForm() {
               exit="exit"
               transition={{ duration: 0.35, ease: "easeOut" as const }}
             >
-              <h3 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
+              <h3 className="text-xl font-bold mb-2" style={{ color: "#1B2E5C" }}>
                 Your contact details
               </h3>
               <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
@@ -482,7 +482,7 @@ export function QuoteForm() {
               >
                 <CheckCircle2 size={32} style={{ color: "#F97316" }} />
               </div>
-              <h3 className="text-2xl font-bold" style={{ color: "#111827" }}>
+              <h3 className="text-2xl font-bold" style={{ color: "#1B2E5C" }}>
                 Quote request received!
               </h3>
               <p className="max-w-sm text-sm leading-relaxed" style={{ color: "#6B7280" }}>

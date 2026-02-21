@@ -39,7 +39,7 @@ export default function ContactPage() {
             </div>
             <h1
               className="text-5xl md:text-6xl font-bold leading-tight mb-4"
-              style={{ color: "#111827" }}
+              style={{ color: "#1B2E5C" }}
             >
               Request a{" "}
               <span className="gradient-text-orange">free quote.</span>
@@ -86,7 +86,7 @@ export default function ContactPage() {
                       <p className="text-xs font-medium uppercase tracking-wider mb-0.5" style={{ color: "#9CA3AF" }}>
                         {item.label}
                       </p>
-                      <p className="text-sm font-medium" style={{ color: "#111827" }}>
+                      <p className="text-sm font-medium" style={{ color: "#1B2E5C" }}>
                         {item.value}
                       </p>
                     </div>

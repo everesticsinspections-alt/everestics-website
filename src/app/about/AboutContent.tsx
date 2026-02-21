@@ -66,7 +66,7 @@ export function AboutContent({ storyP1, storyP2 }: { storyP1: string; storyP2: s
 
           <motion.h1
             className="text-5xl md:text-6xl font-bold leading-tight mb-6"
-            style={{ color: "#111827" }}
+            style={{ color: "#1B2E5C" }}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease }}
@@ -140,7 +140,7 @@ export function AboutContent({ storyP1, storyP2 }: { storyP1: string; storyP2: s
               </div>
               <h2
                 className="text-3xl md:text-4xl font-bold leading-tight mb-6"
-                style={{ color: "#111827" }}
+                style={{ color: "#1B2E5C" }}
               >
                 Founded in Newcastle. Built on one standard.
               </h2>
@@ -209,7 +209,7 @@ export function AboutContent({ storyP1, storyP2 }: { storyP1: string; storyP2: s
           >
             <h2
               className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ color: "#111827" }}
+              style={{ color: "#1B2E5C" }}
             >
               What we stand for
             </h2>
@@ -245,7 +245,7 @@ export function AboutContent({ storyP1, storyP2 }: { storyP1: string; storyP2: s
                   <div>
                     <h3
                       className="text-base font-semibold mb-2"
-                      style={{ color: "#111827" }}
+                      style={{ color: "#1B2E5C" }}
                     >
                       {val.title}
                     </h3>
@@ -261,7 +261,7 @@ export function AboutContent({ storyP1, storyP2 }: { storyP1: string; storyP2: s
       </section>
 
       {/* CTA — intentionally dark for contrast */}
-      <section className="py-20 text-center relative overflow-hidden" style={{ background: "#111827" }}>
+      <section className="py-20 text-center relative overflow-hidden" style={{ background: "#1B2E5C" }}>
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-32 rounded-full blur-3xl opacity-20 pointer-events-none"
           style={{ background: "#F97316" }}

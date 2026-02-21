@@ -65,7 +65,7 @@ export function PricingContent({
           </motion.div>
           <motion.h1
             className="text-5xl md:text-6xl font-bold leading-tight mb-5"
-            style={{ color: "#111827" }}
+            style={{ color: "#1B2E5C" }}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease }}
@@ -151,7 +151,7 @@ export function PricingContent({
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
           >
-            <h2 className="text-3xl font-bold mb-3" style={{ color: "#111827" }}>
+            <h2 className="text-3xl font-bold mb-3" style={{ color: "#1B2E5C" }}>
               Our inspection services
             </h2>
             <p style={{ color: "#6B7280" }}>
@@ -211,7 +211,7 @@ export function PricingContent({
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold mb-1" style={{ color: "#111827" }}>
+                  <h3 className="text-lg font-bold mb-1" style={{ color: "#1B2E5C" }}>
                     {service.title}
                   </h3>
                   <p className="text-xs font-medium mb-3" style={{ color }}>
@@ -278,7 +278,7 @@ export function PricingContent({
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
           >
-            <h2 className="text-3xl font-bold mb-3" style={{ color: "#111827" }}>
+            <h2 className="text-3xl font-bold mb-3" style={{ color: "#1B2E5C" }}>
               Frequently asked questions
             </h2>
             <p style={{ color: "#6B7280" }}>
@@ -301,7 +301,7 @@ export function PricingContent({
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease }}
               >
-                <h3 className="text-base font-semibold mb-2" style={{ color: "#111827" }}>
+                <h3 className="text-base font-semibold mb-2" style={{ color: "#1B2E5C" }}>
                   {faq.question}
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
@@ -316,7 +316,7 @@ export function PricingContent({
       {/* CTA — dark */}
       <section
         className="py-20 text-center relative overflow-hidden"
-        style={{ background: "#111827" }}
+        style={{ background: "#1B2E5C" }}
       >
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-32 rounded-full blur-3xl opacity-20 pointer-events-none"

@@ -23,7 +23,7 @@ export default function NotFound() {
         {/* Heading */}
         <h1
           className="text-2xl font-bold mb-3"
-          style={{ color: "#111827" }}
+          style={{ color: "#1B2E5C" }}
         >
           Page Not Found
         </h1>

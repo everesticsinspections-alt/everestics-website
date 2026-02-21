@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, HardHat, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Services", href: "/services" },
@@ -32,20 +33,17 @@ export function Navigation() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: "#111827",
+          background: "#1B2E5C",
           borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
           boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.25)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between" style={{ height: "70px" }}>
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #F97316, #EA580C)" }}>
-              <HardHat size={16} className="text-white" />
+          <Link href="/" className="flex items-center">
+            <div className="rounded-lg overflow-hidden" style={{ background: "#FFFFFF", padding: "4px 10px" }}>
+              <Image src="/og-image.png" alt="Everestics" width={110} height={40} style={{ objectFit: "contain", display: "block" }} />
             </div>
-            <span className="text-base font-bold tracking-widest uppercase" style={{ color: "#FFFFFF" }}>
-              Ever<span style={{ color: "#F97316" }}>estics</span>
-            </span>
           </Link>
 
           {/* Desktop nav */}
@@ -109,7 +107,7 @@ export function Navigation() {
         <div
           className="absolute top-[70px] left-0 right-0 flex flex-col gap-1 px-4 py-4"
           style={{
-            background: "#1C2436",
+            background: "#152040",
             borderBottom: "1px solid rgba(255,255,255,0.06)",
             transform: mobileOpen ? "translateY(0)" : "translateY(-8px)",
             transition: "transform 0.25s ease",

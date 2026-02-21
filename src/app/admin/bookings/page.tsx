@@ -52,7 +52,7 @@ function MiniCalendar({ bookings }: { bookings: Stripe.PaymentIntent[] }) {
       className="rounded-2xl p-5"
       style={{ background: "#FFFFFF", border: "1px solid #E8EAED" }}
     >
-      <h3 className="text-sm font-semibold mb-4" style={{ color: "#111827" }}>
+      <h3 className="text-sm font-semibold mb-4" style={{ color: "#1B2E5C" }}>
         Calendar — {monthName}
       </h3>
       <div className="grid grid-cols-7 gap-1 text-center mb-2">
@@ -71,7 +71,7 @@ function MiniCalendar({ bookings }: { bookings: Stripe.PaymentIntent[] }) {
               className="relative h-8 w-8 mx-auto flex items-center justify-center rounded-full text-xs font-medium"
               style={{
                 background: hasBooking ? "rgba(249,115,22,0.12)" : isToday ? "#F3F4F6" : "transparent",
-                color: hasBooking ? "#F97316" : isToday ? "#111827" : "#374151",
+                color: hasBooking ? "#F97316" : isToday ? "#1B2E5C" : "#374151",
                 fontWeight: hasBooking || isToday ? 700 : 400,
                 border: isToday ? "1px solid #E8EAED" : "none",
               }}
@@ -110,7 +110,7 @@ export default async function BookingsPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold" style={{ color: "#111827" }}>Bookings</h1>
+        <h1 className="text-2xl font-bold" style={{ color: "#1B2E5C" }}>Bookings</h1>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
           All confirmed bookings with completed payment.
         </p>
@@ -146,7 +146,7 @@ export default async function BookingsPage() {
                     <div key={intent.id} className="p-5 flex flex-col gap-3">
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <p className="text-sm font-semibold" style={{ color: "#111827" }}>
+                          <p className="text-sm font-semibold" style={{ color: "#1B2E5C" }}>
                             {meta.service ?? "Inspection"}
                           </p>
                           <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>

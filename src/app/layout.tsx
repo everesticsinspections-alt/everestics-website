@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "Independent, licensed building inspections across Newcastle and Sydney CBD. Clear reports delivered within 24 hours.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Everestics Building Inspections",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: "Everestics | Building Inspections Newcastle & Sydney CBD",
     description:
       "Independent, licensed building inspections across Newcastle and Sydney CBD. Clear reports delivered within 24 hours.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,

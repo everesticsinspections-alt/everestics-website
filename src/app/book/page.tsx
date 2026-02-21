@@ -47,7 +47,7 @@ function inputStyle(hasError?: boolean): React.CSSProperties {
   return {
     background: "#FFFFFF",
     border: `1px solid ${hasError ? "#EF4444" : "#E8EAED"}`,
-    color: "#111827",
+    color: "#1B2E5C",
     borderRadius: "0.75rem",
     padding: "0.875rem 1rem",
     width: "100%",
@@ -362,7 +362,7 @@ function BookPageContent() {
         >
           Book Your Inspection
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold" style={{ color: "#111827" }}>
+        <h1 className="text-3xl md:text-4xl font-bold" style={{ color: "#1B2E5C" }}>
           Confirm &amp; Pay
         </h1>
         <p className="mt-2 text-sm" style={{ color: "#6B7280" }}>
@@ -433,7 +433,7 @@ function BookPageContent() {
                   exit="exit"
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                  <h2 className="text-lg font-bold mb-1" style={{ color: "#111827" }}>Select your service</h2>
+                  <h2 className="text-lg font-bold mb-1" style={{ color: "#1B2E5C" }}>Select your service</h2>
                   <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
                     {amountLocked ? "Service pre-filled from your quote." : "Choose the inspection you were quoted for."}
                   </p>
@@ -461,7 +461,7 @@ function BookPageContent() {
                           >
                             <Icon size={15} style={{ color: sel ? "#F97316" : "#9CA3AF" }} />
                           </div>
-                          <span className="text-xs font-medium leading-snug" style={{ color: sel ? "#111827" : "#6B7280" }}>
+                          <span className="text-xs font-medium leading-snug" style={{ color: sel ? "#1B2E5C" : "#6B7280" }}>
                             {s.label}
                           </span>
                         </button>
@@ -536,7 +536,7 @@ function BookPageContent() {
                   exit="exit"
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                  <h2 className="text-lg font-bold mb-1" style={{ color: "#111827" }}>Property details</h2>
+                  <h2 className="text-lg font-bold mb-1" style={{ color: "#1B2E5C" }}>Property details</h2>
                   <p className="text-sm mb-6" style={{ color: "#6B7280" }}>Tell us about the property to be inspected.</p>
 
                   <div className="flex flex-col gap-5 mb-6">
@@ -566,7 +566,7 @@ function BookPageContent() {
                             style={{
                               background: propertyType === type ? "rgba(249,115,22,0.06)" : "#F9FAFB",
                               border: propertyType === type ? "1px solid rgba(249,115,22,0.35)" : "1px solid #E8EAED",
-                              color: propertyType === type ? "#111827" : "#6B7280",
+                              color: propertyType === type ? "#1B2E5C" : "#6B7280",
                             }}
                           >
                             {type}
@@ -606,7 +606,7 @@ function BookPageContent() {
                   exit="exit"
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                  <h2 className="text-lg font-bold mb-1" style={{ color: "#111827" }}>Your contact details</h2>
+                  <h2 className="text-lg font-bold mb-1" style={{ color: "#1B2E5C" }}>Your contact details</h2>
                   <p className="text-sm mb-6" style={{ color: "#6B7280" }}>We&apos;ll confirm your booking to these details.</p>
 
                   <div className="flex flex-col gap-5 mb-6">
@@ -673,7 +673,7 @@ function BookPageContent() {
                   exit="exit"
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                  <h2 className="text-lg font-bold mb-1" style={{ color: "#111827" }}>Payment</h2>
+                  <h2 className="text-lg font-bold mb-1" style={{ color: "#1B2E5C" }}>Payment</h2>
                   <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
                     Complete your payment to confirm the booking.
                   </p>
@@ -706,7 +706,7 @@ function BookPageContent() {
                         variables: {
                           colorPrimary: "#F97316",
                           colorBackground: "#FFFFFF",
-                          colorText: "#111827",
+                          colorText: "#1B2E5C",
                           colorDanger: "#EF4444",
                           borderRadius: "12px",
                           fontFamily: "system-ui, sans-serif",
@@ -746,7 +746,7 @@ function BookPageContent() {
                     <CheckCircle2 size={32} style={{ color: "#F97316" }} />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold mb-2" style={{ color: "#111827" }}>Booking confirmed!</h2>
+                    <h2 className="text-2xl font-bold mb-2" style={{ color: "#1B2E5C" }}>Booking confirmed!</h2>
                     <p className="text-sm leading-relaxed max-w-xs mx-auto" style={{ color: "#6B7280" }}>
                       Payment received. We&apos;ll be in touch within 4 business hours to confirm your inspection date.
                     </p>

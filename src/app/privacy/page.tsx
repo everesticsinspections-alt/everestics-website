@@ -20,7 +20,7 @@ export default function PrivacyPage() {
       <div
         className="py-14 px-4"
         style={{
-          background: "linear-gradient(135deg, #111827 0%, #1F2937 100%)",
+          background: "linear-gradient(135deg, #1B2E5C 0%, #152347 100%)",
         }}
       >
         <div className="max-w-3xl mx-auto">
@@ -169,7 +169,7 @@ export default function PrivacyPage() {
               className="mt-3 rounded-xl p-4"
               style={{ background: "#F7F8FA", border: "1px solid #E8EAED" }}
             >
-              <p className="text-sm font-semibold" style={{ color: "#111827" }}>{COMPANY}</p>
+              <p className="text-sm font-semibold" style={{ color: "#1B2E5C" }}>{COMPANY}</p>
               <p className="text-sm mt-1" style={{ color: "#6B7280" }}>Newcastle &amp; Sydney CBD, NSW, Australia</p>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
@@ -193,7 +193,7 @@ export default function PrivacyPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="text-base font-bold mb-3" style={{ color: "#111827" }}>
+      <h2 className="text-base font-bold mb-3" style={{ color: "#1B2E5C" }}>
         {title}
       </h2>
       <div

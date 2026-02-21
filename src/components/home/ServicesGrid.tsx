@@ -122,7 +122,7 @@ export function ServicesGrid({ services = DEFAULT_SERVICES }: { services?: Servi
           </div>
           <h2
             className="text-4xl md:text-5xl font-bold leading-tight mb-4"
-            style={{ color: "#111827" }}
+            style={{ color: "#1B2E5C" }}
           >
             Every inspection type,{" "}
             <span className="gradient-text-orange">covered.</span>
@@ -168,7 +168,7 @@ export function ServicesGrid({ services = DEFAULT_SERVICES }: { services?: Servi
                   </div>
                   <h3
                     className="text-2xl font-bold mb-3"
-                    style={{ color: "#111827" }}
+                    style={{ color: "#1B2E5C" }}
                   >
                     {featured.title}
                   </h3>
@@ -217,7 +217,7 @@ export function ServicesGrid({ services = DEFAULT_SERVICES }: { services?: Servi
                 <div>
                   <h3
                     className="text-base font-semibold mb-1.5"
-                    style={{ color: "#111827" }}
+                    style={{ color: "#1B2E5C" }}
                   >
                     {service.title}
                   </h3>

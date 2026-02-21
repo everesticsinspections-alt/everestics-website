@@ -44,7 +44,7 @@ export function ServicesContent({ services }: { services: ServiceItem[] }) {
           </motion.div>
           <motion.h1
             className="text-5xl md:text-6xl font-bold leading-tight mb-5"
-            style={{ color: "#111827" }}
+            style={{ color: "#1B2E5C" }}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease }}
@@ -116,7 +116,7 @@ export function ServicesContent({ services }: { services: ServiceItem[] }) {
 
                     <h2
                       className="text-2xl font-bold mb-1"
-                      style={{ color: "#111827" }}
+                      style={{ color: "#1B2E5C" }}
                     >
                       {service.title}
                     </h2>
@@ -173,7 +173,7 @@ export function ServicesContent({ services }: { services: ServiceItem[] }) {
       {/* Bottom CTA — intentionally dark */}
       <section
         className="py-20 text-center relative overflow-hidden"
-        style={{ background: "#111827" }}
+        style={{ background: "#1B2E5C" }}
       >
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-32 rounded-full blur-3xl opacity-20 pointer-events-none"

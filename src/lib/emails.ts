@@ -72,7 +72,7 @@ function row(label: string, value: string) {
   return `
     <tr>
       <td style="padding:8px 12px;font-size:12px;color:#6B7280;width:140px;vertical-align:top;">${label}</td>
-      <td style="padding:8px 12px;font-size:13px;color:#111827;font-weight:500;">${value || "—"}</td>
+      <td style="padding:8px 12px;font-size:13px;color:#1B2E5C;font-weight:500;">${value || "—"}</td>
     </tr>`;
 }
 
@@ -91,21 +91,21 @@ export function quoteConfirmationEmail(data: {
   address: string;
 }) {
   const body = `
-    <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#111827;">
+    <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#1B2E5C;">
       Thanks, ${data.name.split(" ")[0]}!
     </h2>
     <p style="margin:0 0 20px;font-size:14px;color:#6B7280;line-height:1.6;">
       We've received your quote request and will review your details shortly.
-      You can expect a reply within <strong style="color:#111827;">1–2 business days</strong>.
+      You can expect a reply within <strong style="color:#1B2E5C;">1–2 business days</strong>.
     </p>
 
     <div style="background:rgba(249,115,22,0.05);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:16px 20px;margin-bottom:20px;">
       <p style="margin:0 0 4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#EA580C;">Your Request</p>
-      <p style="margin:0;font-size:14px;color:#111827;font-weight:600;">${data.service}</p>
+      <p style="margin:0;font-size:14px;color:#1B2E5C;font-weight:600;">${data.service}</p>
       <p style="margin:4px 0 0;font-size:13px;color:#6B7280;">${data.address}</p>
     </div>
 
-    <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#111827;">What happens next</p>
+    <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#1B2E5C;">What happens next</p>
     <table width="100%" cellpadding="0" cellspacing="0">
       ${["Our team reviews your inspection requirements", "We prepare a tailored, itemised quote", "You receive it via email within 1–2 business days"].map((step, i) => `
       <tr>
@@ -140,7 +140,7 @@ export function quoteAlertEmail(data: {
   preferredDate?: string;
 }) {
   const body = `
-    <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#111827;">
+    <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#1B2E5C;">
       New Quote Request
     </h2>
     <p style="margin:0 0 20px;font-size:14px;color:#6B7280;">
@@ -182,7 +182,7 @@ export function bookingConfirmationEmail(data: {
   const body = `
     <div style="text-align:center;padding:8px 0 24px;">
       <div style="display:inline-block;width:52px;height:52px;border-radius:50%;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.25);line-height:52px;font-size:22px;margin-bottom:12px;">✓</div>
-      <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;color:#111827;">Booking Confirmed!</h2>
+      <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;color:#1B2E5C;">Booking Confirmed!</h2>
       <p style="margin:0;font-size:14px;color:#6B7280;">
         Thanks, ${data.name.split(" ")[0]}. Your inspection has been booked and payment received.
       </p>
@@ -195,7 +195,7 @@ export function bookingConfirmationEmail(data: {
       row("Amount Paid", `<span style="color:#16A34A;font-weight:700;">${formatted} AUD</span>`)
     )}
 
-    <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#111827;">What happens next</p>
+    <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#1B2E5C;">What happens next</p>
     <table width="100%" cellpadding="0" cellspacing="0">
       ${[
         "Our team will contact you to confirm the exact inspection time",
@@ -234,7 +234,7 @@ export function bookingAlertEmail(data: {
 }) {
   const formatted = new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD" }).format(data.amountAud);
   const body = `
-    <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#111827;">
+    <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#1B2E5C;">
       New Booking + Payment Received
     </h2>
     <p style="margin:0 0 20px;font-size:14px;color:#6B7280;">
@@ -273,7 +273,7 @@ export function quoteOfferEmail(data: {
 }) {
   const formatted = new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD" }).format(data.amountAud);
   const body = `
-    <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#111827;">
+    <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#1B2E5C;">
       Your quote is ready, ${data.name.split(" ")[0]}!
     </h2>
     <p style="margin:0 0 20px;font-size:14px;color:#6B7280;line-height:1.6;">
@@ -282,7 +282,7 @@ export function quoteOfferEmail(data: {
 
     <div style="background:rgba(249,115,22,0.05);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:20px 24px;margin-bottom:24px;">
       <p style="margin:0 0 4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#EA580C;">Your Quote</p>
-      <p style="margin:0 0 4px;font-size:15px;color:#111827;font-weight:600;">${data.service}</p>
+      <p style="margin:0 0 4px;font-size:15px;color:#1B2E5C;font-weight:600;">${data.service}</p>
       <p style="margin:0;font-size:28px;font-weight:800;color:#F97316;">${formatted} AUD</p>
     </div>
 

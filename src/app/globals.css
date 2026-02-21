@@ -11,7 +11,7 @@
   --color-brand-orange-dark: #EA580C;
   --color-brand-blue: #2563EB;
   --color-brand-blue-light: #3B82F6;
-  --color-brand-ink: #111827;
+  --color-brand-ink: #1B2E5C;
   --color-brand-text: #374151;
   --color-brand-muted: #6B7280;
   --color-brand-subtle: #9CA3AF;
@@ -81,5 +81,5 @@ body {
 /* Selection */
 ::selection {
   background: rgba(249, 115, 22, 0.12);
-  color: #111827;
+  color: #1B2E5C;
 }
