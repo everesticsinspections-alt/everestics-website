@@ -31,22 +31,22 @@ export function Hero({
   subheadline?: string;
 }) {
   return (
-    <section className="relative min-h-screen flex items-stretch overflow-hidden">
+    <section className="relative flex items-stretch overflow-hidden">
       {/* Split background: navy left, light right */}
-      <div className="absolute inset-0 flex pointer-events-none">
-        <div className="w-full lg:w-1/2 h-full" style={{ background: "#1B2E5C" }} />
-        <div className="hidden lg:block w-1/2 h-full" style={{ background: "#F7F8FA" }} />
+      <div className="absolute inset-0 grid lg:grid-cols-2 pointer-events-none">
+        <div style={{ background: "#1B2E5C" }} />
+        <div className="hidden lg:block" style={{ background: "#F7F8FA" }} />
       </div>
       {/* Subtle dot grid on navy side */}
       <div
-        className="absolute inset-0 lg:w-1/2 pointer-events-none"
+        className="absolute top-0 left-0 bottom-0 w-full lg:w-1/2 pointer-events-none"
         style={{
           backgroundImage: "radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-28 lg:py-0 grid lg:grid-cols-2 gap-0 items-center min-h-screen">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 lg:gap-0 items-center">
 
         {/* ── Left column: copy ───────────────────────────────────────── */}
         <div className="flex flex-col gap-7 lg:pr-16">
