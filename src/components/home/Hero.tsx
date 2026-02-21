@@ -31,23 +31,25 @@ export function Hero({
   subheadline?: string;
 }) {
   return (
-    <section
-      className="relative min-h-screen flex items-center overflow-hidden blueprint-grid"
-      style={{ background: "#FFFFFF" }}
-    >
-      {/* Soft colour wash */}
+    <section className="relative min-h-screen flex items-stretch overflow-hidden">
+      {/* Split background: navy left, light right */}
+      <div className="absolute inset-0 flex pointer-events-none">
+        <div className="w-full lg:w-1/2 h-full" style={{ background: "#1B2E5C" }} />
+        <div className="hidden lg:block w-1/2 h-full" style={{ background: "#F7F8FA" }} />
+      </div>
+      {/* Subtle dot grid on navy side */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 lg:w-1/2 pointer-events-none"
         style={{
-          background:
-            "radial-gradient(ellipse 70% 60% at 30% 50%, rgba(249,115,22,0.05) 0%, transparent 70%)",
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
         }}
       />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-28 lg:py-0 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-screen">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-28 lg:py-0 grid lg:grid-cols-2 gap-0 items-center min-h-screen">
 
         {/* ── Left column: copy ───────────────────────────────────────── */}
-        <div className="flex flex-col gap-7">
+        <div className="flex flex-col gap-7 lg:pr-16">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -70,7 +72,7 @@ export function Hero({
           {/* Headline */}
           <motion.h1
             className="text-5xl md:text-6xl font-bold leading-tight tracking-tight"
-            style={{ color: "#1B2E5C" }}
+            style={{ color: "#FFFFFF" }}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.08, ease }}
@@ -81,7 +83,7 @@ export function Hero({
           {/* Subheading */}
           <motion.p
             className="text-lg leading-relaxed max-w-lg"
-            style={{ color: "#6B7280" }}
+            style={{ color: "rgba(255,255,255,0.7)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18, ease }}
@@ -109,7 +111,7 @@ export function Hero({
             <Link
               href="/services"
               className="flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-medium transition-all duration-200"
-              style={{ color: "#374151", background: "#F7F8FA", border: "1px solid #E8EAED" }}
+              style={{ color: "#FFFFFF", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}
             >
               View Services
             </Link>
@@ -118,7 +120,7 @@ export function Hero({
           {/* Stats strip */}
           <motion.div
             className="grid grid-cols-3 divide-x rounded-2xl overflow-hidden max-w-sm"
-            style={{ border: "1px solid #E8EAED" }}
+            style={{ border: "1px solid rgba(255,255,255,0.12)" }}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.38, ease }}
@@ -132,14 +134,14 @@ export function Hero({
                 key={stat.label}
                 className="flex flex-col items-center py-4 px-3"
                 style={{
-                  background: "#FAFAFA",
-                  borderLeft: i > 0 ? "1px solid #E8EAED" : "none",
+                  background: "rgba(255,255,255,0.06)",
+                  borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.12)" : "none",
                 }}
               >
                 <span className="text-xl font-bold" style={{ color: "#F97316" }}>
                   {stat.value}
                 </span>
-                <span className="text-xs mt-0.5 text-center" style={{ color: "#9CA3AF" }}>
+                <span className="text-xs mt-0.5 text-center" style={{ color: "rgba(255,255,255,0.5)" }}>
                   {stat.label}
                 </span>
               </div>
@@ -149,7 +151,7 @@ export function Hero({
 
         {/* ── Right column: image mosaic ──────────────────────────────── */}
         <motion.div
-          className="hidden lg:block relative"
+          className="hidden lg:block relative lg:pl-16"
           initial={{ opacity: 0, x: 32 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease }}

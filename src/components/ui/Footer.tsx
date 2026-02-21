@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
-import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowUpRight, MountainSnow } from "lucide-react";
 
 const services = [
   "Pre-Purchase Property Inspections",
@@ -34,10 +33,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-flex mb-4">
-              <div className="rounded-lg overflow-hidden" style={{ background: "#FFFFFF", padding: "4px 10px" }}>
-                <Image src="/og-image.png" alt="Everestics" width={110} height={40} style={{ objectFit: "contain", display: "block" }} />
+            <Link href="/" className="flex items-center gap-3 mb-4">
+              <div
+                className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{ background: "linear-gradient(135deg, #F97316, #EA580C)" }}
+              >
+                <MountainSnow size={18} className="text-white" />
               </div>
+              <span className="text-lg font-bold tracking-widest uppercase" style={{ color: "#F9FAFB" }}>
+                Ever<span style={{ color: "#F97316" }}>estics</span>
+              </span>
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               A trusted provider of comprehensive building inspection services for residential and commercial properties. Newcastle &amp; Sydney CBD.

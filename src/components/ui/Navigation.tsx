@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { Menu, X, ArrowRight, MountainSnow } from "lucide-react";
 
 const navLinks = [
   { label: "Services", href: "/services" },
@@ -40,10 +39,16 @@ export function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between" style={{ height: "70px" }}>
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <div className="rounded-lg overflow-hidden" style={{ background: "#FFFFFF", padding: "4px 10px" }}>
-              <Image src="/og-image.png" alt="Everestics" width={110} height={40} style={{ objectFit: "contain", display: "block" }} />
+          <Link href="/" className="flex items-center gap-2.5">
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+              style={{ background: "linear-gradient(135deg, #F97316, #EA580C)" }}
+            >
+              <MountainSnow size={16} className="text-white" />
             </div>
+            <span className="text-base font-bold tracking-widest uppercase" style={{ color: "#FFFFFF" }}>
+              Ever<span style={{ color: "#F97316" }}>estics</span>
+            </span>
           </Link>
 
           {/* Desktop nav */}
