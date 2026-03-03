@@ -20,7 +20,7 @@ const values = [
     title: "Complete Transparency",
     description:
       "No vague language. Our reports are clear, documented with photographs, and written for real people — not just engineers.",
-    color: "#2563EB",
+    color: "#1B2E5C",
   },
   {
     icon: Users,
@@ -34,7 +34,7 @@ const values = [
     title: "Licensed & Accountable",
     description:
       "Every inspector holds current NSW licences and professional indemnity. We stand behind every report we issue.",
-    color: "#2563EB",
+    color: "#1B2E5C",
   },
 ];
 
@@ -55,9 +55,9 @@ export function AboutContent({ storyP1, storyP2 }: { storyP1: string; storyP2: s
             <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium uppercase tracking-widest mb-6"
               style={{
-                background: "rgba(37,99,235,0.07)",
-                border: "1px solid rgba(37,99,235,0.18)",
-                color: "#2563EB",
+                background: "rgba(249,115,22,0.08)",
+                border: "1px solid rgba(249,115,22,0.2)",
+                color: "#EA580C",
               }}
             >
               About Everestics
@@ -260,36 +260,82 @@ export function AboutContent({ storyP1, storyP2 }: { storyP1: string; storyP2: s
         </div>
       </section>
 
-      {/* CTA — intentionally dark for contrast */}
-      <section className="py-20 text-center relative overflow-hidden" style={{ background: "#1B2E5C" }}>
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-32 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "#F97316" }}
-        />
+      {/* CTA — photo-backed, matches home CTASection */}
+      <section className="relative py-28 text-center overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/property-inspection-hero.jpeg"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0" style={{ background: "rgba(7,10,24,0.88)" }} />
+          {/* Orange top glow */}
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] pointer-events-none"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(249,115,22,0.6), transparent)" }}
+          />
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-56 rounded-full blur-3xl opacity-14 pointer-events-none"
+            style={{ background: "#F97316" }}
+          />
+        </div>
+
         <div className="max-w-2xl mx-auto px-6 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
-            className="flex flex-col items-center gap-6"
+            className="flex flex-col items-center gap-5"
           >
-            <h2 className="text-3xl font-bold" style={{ color: "#F9FAFB" }}>
-              Ready to work with us?
-            </h2>
-            <p style={{ color: "#9CA3AF" }}>
-              Get a free, no-obligation quote for your inspection today.
-            </p>
-            <Link
-              href="/contact"
-              className="flex items-center gap-2 px-8 py-4 rounded-xl text-base font-semibold text-white transition-all duration-200 hover:scale-105"
+            <span
+              className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-[0.14em]"
               style={{
-                background: "linear-gradient(135deg, #F97316, #EA580C)",
-                boxShadow: "0 4px 24px rgba(249,115,22,0.35)",
+                background:           "rgba(249,115,22,0.10)",
+                border:               "1px solid rgba(249,115,22,0.25)",
+                color:                "#FB923C",
+                backdropFilter:       "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
               }}
             >
-              Request a Quote <ArrowRight size={16} />
-            </Link>
+              Get Started Today
+            </span>
+
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "#F9FAFB" }}>
+              Ready to work with us?
+            </h2>
+            <p className="max-w-md text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+              Get a free, no-obligation quote for your inspection today.
+            </p>
+
+            {/* Glass card wrapping the CTA */}
+            <div
+              className="w-full max-w-lg rounded-3xl p-7 flex flex-col items-center gap-4 mt-1"
+              style={{
+                background:           "rgba(255,255,255,0.05)",
+                backdropFilter:       "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border:               "1px solid rgba(255,255,255,0.10)",
+                boxShadow:            "inset 0 1px 0 rgba(255,255,255,0.07), 0 24px 60px rgba(0,0,0,0.3)",
+              }}
+            >
+              <Link
+                href="/contact"
+                className="flex items-center gap-2 px-8 py-4 rounded-xl text-base font-semibold text-white transition-all hover:scale-105 hover:brightness-110 w-full sm:w-auto justify-center"
+                style={{
+                  background: "linear-gradient(135deg, #F97316, #EA580C)",
+                  boxShadow:  "0 4px 24px rgba(249,115,22,0.40)",
+                }}
+              >
+                Request a Free Quote <ArrowRight size={16} />
+              </Link>
+              <p className="text-xs" style={{ color: "rgba(255,255,255,0.30)" }}>
+                Newcastle &amp; Sydney CBD · No obligation · Response within 4 business hours
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>

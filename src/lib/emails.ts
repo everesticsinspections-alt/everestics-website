@@ -138,6 +138,8 @@ export function quoteAlertEmail(data: {
   propertyType: string;
   message?: string;
   preferredDate?: string;
+  quoteId?: string;
+  adminLink?: string;
 }) {
   const body = `
     <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#1B2E5C;">
@@ -155,16 +157,23 @@ export function quoteAlertEmail(data: {
       row("Property", data.address) +
       row("Type", data.propertyType) +
       (data.preferredDate ? row("Preferred Date", data.preferredDate) : "") +
-      (data.message ? row("Notes", data.message) : "")
+      (data.message ? row("Notes", data.message) : "") +
+      (data.quoteId ? row("Reference", `<span style="font-family:monospace;">${data.quoteId}</span>`) : "")
     )}
 
+    ${data.adminLink ? `
+    <a href="${data.adminLink}"
+       style="display:block;text-align:center;background:linear-gradient(135deg,#1B2E5C,#152347);color:#FFFFFF;font-size:14px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none;margin-bottom:12px;">
+      View &amp; Reply in Admin Panel →
+    </a>` : ""}
+
     <a href="mailto:${data.email}?subject=Re: Your Everestics Quote Request"
-       style="display:inline-block;background:linear-gradient(135deg,#F97316,#EA580C);color:#FFFFFF;font-size:13px;font-weight:600;padding:12px 24px;border-radius:10px;text-decoration:none;margin-top:4px;">
-      Reply to ${data.name.split(" ")[0]}
+       style="display:block;text-align:center;background:#F7F8FA;border:1px solid #E8EAED;color:#374151;font-size:13px;font-weight:600;padding:12px 24px;border-radius:10px;text-decoration:none;">
+      Or reply directly via email
     </a>
   `;
   return {
-    subject: `New Quote Request — ${data.service}`,
+    subject: `New Quote Request — ${data.service} (${data.name})`,
     html: layout("New Quote Request", body),
   };
 }
@@ -272,6 +281,8 @@ export function quoteOfferEmail(data: {
   paymentLink: string;
 }) {
   const formatted = new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD" }).format(data.amountAud);
+  // Extract token from paymentLink (everything after ?quote=)
+  const refCode = data.paymentLink.split("?quote=")[1] ?? "";
   const body = `
     <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#1B2E5C;">
       Your quote is ready, ${data.name.split(" ")[0]}!
@@ -294,6 +305,13 @@ export function quoteOfferEmail(data: {
     <p style="margin:0 0 8px;font-size:12px;color:#9CA3AF;text-align:center;">
       This quote link expires in <strong style="color:#6B7280;">7 days</strong>. The amount is fixed and cannot be changed.
     </p>
+
+    ${refCode ? `
+    <div style="background:#F7F8FA;border:1px solid #E8EAED;border-radius:12px;padding:16px 20px;margin-top:16px;">
+      <p style="margin:0 0 6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#9CA3AF;">Your Reference Code</p>
+      <p style="margin:0 0 8px;font-size:12px;color:#6B7280;">Can't click the button above? Go to <a href="https://www.everestics.com.au/book" style="color:#F97316;">everestics.com.au/book</a> and enter this code:</p>
+      <p style="margin:0;font-size:11px;font-family:monospace;color:#1B2E5C;word-break:break-all;background:#FFFFFF;border:1px solid #E8EAED;border-radius:8px;padding:10px 12px;">${refCode}</p>
+    </div>` : ""}
 
     <table width="100%" style="margin-top:16px;background:#F7F8FA;border:1px solid #E8EAED;border-radius:12px;">
       <tr>
@@ -325,6 +343,8 @@ export async function sendQuoteEmails(data: {
   propertyType: string;
   message?: string;
   preferredDate?: string;
+  quoteId?: string;
+  adminLink?: string;
 }) {
   const { transporter, from } = getTransport();
   const customer = quoteConfirmationEmail(data);

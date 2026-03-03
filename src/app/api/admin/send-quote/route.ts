@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createHmac } from "crypto";
 import { sendQuoteOffer } from "@/lib/emails";
+import { updateQuoteStatus } from "@/lib/quoteStore";
 
 async function isAuthenticated() {
   const cookieStore = await cookies();
@@ -18,7 +19,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { name, email, service, amountAud } = await req.json();
+  const { name, email, service, amountAud, quoteId } = await req.json();
 
   if (!name || !email || !service || !amountAud) {
     return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
@@ -29,7 +30,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Server misconfiguration." }, { status: 500 });
   }
 
-  // Build HMAC-signed token (no database needed)
+  // Build HMAC-signed token
   const amountCents = Math.round(parseFloat(amountAud) * 100);
   const exp = Math.floor(Date.now() / 1000) + 7 * 24 * 3600; // 7 days
   const payload = b64url(JSON.stringify({ name, email, service, amountCents, exp }));
@@ -41,6 +42,9 @@ export async function POST(req: NextRequest) {
 
   try {
     await sendQuoteOffer({ name, email, service, amountAud: parseFloat(amountAud), paymentLink });
+    if (quoteId) {
+      await updateQuoteStatus(quoteId, "quoted", parseFloat(amountAud));
+    }
     return NextResponse.json({ ok: true, paymentLink });
   } catch (err) {
     console.error("send-quote email error:", err);

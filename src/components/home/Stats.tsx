@@ -53,7 +53,7 @@ export function Stats() {
             >
               <div
                 className="text-4xl md:text-5xl font-bold tabular-nums mb-1"
-                style={{ color: i % 2 === 0 ? "#F97316" : "#2563EB" }}
+                style={{ color: i % 2 === 0 ? "#F97316" : "#1B2E5C" }}
               >
                 <CountUp target={stat.value} suffix={stat.suffix} />
               </div>

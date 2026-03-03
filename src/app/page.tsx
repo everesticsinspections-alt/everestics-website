@@ -5,8 +5,8 @@ import { WhyUs } from "@/components/home/WhyUs";
 import { CTASection } from "@/components/home/CTASection";
 import { getContent } from "@/lib/content";
 
-export default function Home() {
-  const content = getContent();
+export default async function Home() {
+  const content = await getContent();
   return (
     <>
       <Hero headline={content.hero.headline} subheadline={content.hero.subheadline} />

@@ -117,7 +117,7 @@ function PaymentForm({
   const [error, setError] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     if (!stripe || !elements) return;
 
@@ -226,16 +226,20 @@ function BookPageContent() {
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
 
-  // Quote token state
+  // Quote token state (from URL ?quote= param)
   const [quoteToken, setQuoteToken] = useState<string | null>(null);
   const [quoteError, setQuoteError] = useState("");
   const [quoteLoading, setQuoteLoading] = useState(false);
   const [amountLocked, setAmountLocked] = useState(false);
 
+  // Manual reference code input
+  const [refCodeInput, setRefCodeInput] = useState("");
+  const [refCodeError, setRefCodeError] = useState("");
+  const [refCodeApplying, setRefCodeApplying] = useState(false);
+
   // Form data
   const [service, setService] = useState("");
   const [quotedAmount, setQuotedAmount] = useState("");
-  const [amountError, setAmountError] = useState("");
   const [address, setAddress] = useState("");
   const [propertyType, setPropertyType] = useState<"residential" | "commercial" | "industrial" | "">("");
   const [addressError, setAddressError] = useState("");
@@ -274,6 +278,30 @@ function BookPageContent() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  async function applyRefCode() {
+    const token = refCodeInput.trim();
+    if (!token) return;
+    setRefCodeApplying(true);
+    setRefCodeError("");
+    try {
+      const res = await fetch(`/api/validate-quote?token=${encodeURIComponent(token)}`);
+      const data = await res.json();
+      if (data.error) {
+        setRefCodeError(data.error);
+      } else {
+        setName(data.name ?? "");
+        setEmail(data.email ?? "");
+        setService(data.service ?? "");
+        setQuotedAmount(String(data.amountAud));
+        setAmountLocked(true);
+      }
+    } catch {
+      setRefCodeError("Could not validate reference code. Please contact us.");
+    } finally {
+      setRefCodeApplying(false);
+    }
+  }
+
   function go(d: number) {
     setDirection(d);
     setStep((s) => s + d);
@@ -281,14 +309,7 @@ function BookPageContent() {
 
   // Validate step 1
   function validateStep1() {
-    if (!service) return false;
-    const n = parseFloat(quotedAmount);
-    if (!quotedAmount || isNaN(n) || n < 50 || n > 10000) {
-      setAmountError("Please enter a valid quoted amount between $50 and $10,000.");
-      return false;
-    }
-    setAmountError("");
-    return true;
+    return amountLocked && !!service;
   }
 
   // Validate step 2
@@ -413,6 +434,46 @@ function BookPageContent() {
           </div>
         )}
 
+        {/* Reference code input — shown only when no quote is loaded yet */}
+        {!quoteToken && !amountLocked && !quoteError && !quoteLoading && (
+          <div
+            className="rounded-2xl p-5 mb-4"
+            style={{ background: "#FFFFFF", border: "1px solid #E8EAED" }}
+          >
+            <p className="text-sm font-semibold mb-1" style={{ color: "#1B2E5C" }}>
+              Have a reference code?
+            </p>
+            <p className="text-xs mb-3" style={{ color: "#9CA3AF" }}>
+              Paste the code from your quote email to lock in your price automatically.
+            </p>
+            <div className="flex gap-2">
+              <input
+                value={refCodeInput}
+                onChange={(e) => { setRefCodeInput(e.target.value); setRefCodeError(""); }}
+                onKeyDown={(e) => e.key === "Enter" && applyRefCode()}
+                placeholder="Paste reference code from your email…"
+                style={{
+                  ...inputStyle(),
+                  fontFamily: "monospace",
+                  flex: 1,
+                  fontSize: "11px",
+                }}
+              />
+              <button
+                onClick={applyRefCode}
+                disabled={!refCodeInput.trim() || refCodeApplying}
+                className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex-shrink-0 disabled:opacity-50 transition-all hover:scale-105"
+                style={{ background: "linear-gradient(135deg, #F97316, #EA580C)" }}
+              >
+                {refCodeApplying ? <Loader2 size={13} className="animate-spin" /> : "Apply"}
+              </button>
+            </div>
+            {refCodeError && (
+              <p className="text-xs mt-2" style={{ color: "#EF4444" }}>{refCodeError}</p>
+            )}
+          </div>
+        )}
+
         <div
           className="rounded-2xl p-8 md:p-10"
           style={{ background: "#FFFFFF", border: "1px solid #E8EAED", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" }}
@@ -472,7 +533,7 @@ function BookPageContent() {
                   {/* Quoted amount */}
                   <div className="mb-6">
                     <label className="block text-xs font-medium mb-2" style={{ color: "#6B7280" }}>
-                      {amountLocked ? "Quoted Price (AUD) — locked" : "Your quoted price (AUD) *"}
+                      Quoted Price (AUD)
                     </label>
                     {amountLocked ? (
                       <div
@@ -488,35 +549,21 @@ function BookPageContent() {
                         </span>
                       </div>
                     ) : (
-                      <>
-                        <div className="relative">
-                          <DollarSign
-                            size={15}
-                            className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                            style={{ color: "#9CA3AF" }}
-                          />
-                          <input
-                            type="number"
-                            min="50"
-                            max="10000"
-                            step="0.01"
-                            placeholder="e.g. 450.00"
-                            value={quotedAmount}
-                            onChange={(e) => { setQuotedAmount(e.target.value); setAmountError(""); }}
-                            style={{ ...inputStyle(!!amountError), paddingLeft: "2.25rem" }}
-                          />
-                        </div>
-                        <FieldError msg={amountError} />
-                        <p className="text-xs mt-1.5" style={{ color: "#9CA3AF" }}>
-                          Enter the exact amount from your Everestics quote.
+                      <div
+                        className="flex items-center gap-3 rounded-xl px-4 py-3"
+                        style={{ background: "#F7F8FA", border: "1px solid #E8EAED" }}
+                      >
+                        <DollarSign size={15} style={{ color: "#9CA3AF" }} />
+                        <p className="text-sm" style={{ color: "#9CA3AF" }}>
+                          Enter your reference code above to set the quoted price.
                         </p>
-                      </>
+                      </div>
                     )}
                   </div>
 
                   <button
                     onClick={() => validateStep1() && go(1)}
-                    disabled={!service}
+                    disabled={!amountLocked}
                     className="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
                     style={{ background: "linear-gradient(135deg, #F97316, #EA580C)" }}
                   >

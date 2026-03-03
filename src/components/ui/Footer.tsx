@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { MapPin, Phone, Mail, ArrowUpRight, MountainSnow } from "lucide-react";
+import Image from "next/image";
+import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 
 const services = [
   "Pre-Purchase Property Inspections",
@@ -33,16 +34,32 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-4">
+            <Link href="/" className="inline-flex items-center mb-5">
+              {/* White pill — matches logo's white background so it blends cleanly on dark footer */}
               <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                style={{ background: "linear-gradient(135deg, #F97316, #EA580C)" }}
+                style={{
+                  background:   "#FFFFFF",
+                  borderRadius: "14px",
+                  padding:      "10px 16px",
+                  display:      "inline-flex",
+                  boxShadow:    "0 2px 18px rgba(0,0,0,0.30)",
+                }}
               >
-                <MountainSnow size={18} className="text-white" />
+                {/* Crop window — removes the white margin in og-image so mark fills the frame */}
+                <div
+                  className="relative overflow-hidden"
+                  style={{ width: "170px", height: "60px" }}
+                >
+                  <Image
+                    src="/og-image.png"
+                    fill
+                    alt="Everestics"
+                    className="object-cover"
+                    style={{ objectPosition: "50% 48%" }}
+                    sizes="170px"
+                  />
+                </div>
               </div>
-              <span className="text-lg font-bold tracking-widest uppercase" style={{ color: "#F9FAFB" }}>
-                Ever<span style={{ color: "#F97316" }}>estics</span>
-              </span>
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               A trusted provider of comprehensive building inspection services for residential and commercial properties. Newcastle &amp; Sydney CBD.
@@ -124,7 +141,7 @@ export function Footer() {
             <div className="flex flex-col gap-5">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <MapPin size={14} style={{ color: "#3B82F6" }} />
+                  <MapPin size={14} style={{ color: "#F97316" }} />
                   <span className="text-sm font-medium" style={{ color: "#F9FAFB" }}>Newcastle</span>
                 </div>
                 <p className="text-sm pl-5" style={{ color: "#6B7280" }}>
@@ -133,7 +150,7 @@ export function Footer() {
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <MapPin size={14} style={{ color: "#3B82F6" }} />
+                  <MapPin size={14} style={{ color: "#F97316" }} />
                   <span className="text-sm font-medium" style={{ color: "#F9FAFB" }}>Sydney CBD</span>
                 </div>
                 <p className="text-sm pl-5" style={{ color: "#6B7280" }}>

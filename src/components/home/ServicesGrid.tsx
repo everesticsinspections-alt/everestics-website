@@ -13,7 +13,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   "handover": ClipboardCheck,
   "termite-pest": FileText,
 };
-const COLORS = ["#F97316", "#3B82F6", "#F97316", "#3B82F6", "#F97316", "#3B82F6"];
+const COLORS = ["#F97316", "#1B2E5C", "#F97316", "#1B2E5C", "#F97316", "#1B2E5C"];
 
 const DEFAULT_SERVICES: ServiceItem[] = [
   {

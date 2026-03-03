@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import fs from "fs/promises";
-import path from "path";
-
-const CONTENT_PATH = path.join(process.cwd(), "src/data/site-content.json");
+import { getContent, saveContent, SiteContent } from "@/lib/content";
 
 async function isAuthenticated() {
   const cookieStore = await cookies();
@@ -15,17 +12,15 @@ export async function GET() {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const raw = await fs.readFile(CONTENT_PATH, "utf-8");
-  return NextResponse.json(JSON.parse(raw));
+  const content = await getContent();
+  return NextResponse.json(content);
 }
 
 export async function POST(req: NextRequest) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const body = await req.json();
-  // NOTE: Writing to the filesystem works in local dev.
-  // In production on Vercel, use Vercel KV or Edge Config instead.
-  await fs.writeFile(CONTENT_PATH, JSON.stringify(body, null, 2), "utf-8");
+  const body = await req.json() as SiteContent;
+  await saveContent(body);
   return NextResponse.json({ ok: true });
 }

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Eye, Award, Clock, FileCheck, Shield, HeartHandshake } from "lucide-react";
 
 const ICONS = [Eye, Award, Clock, FileCheck, Shield, HeartHandshake];
-const COLORS = ["#3B82F6", "#F97316", "#3B82F6", "#F97316", "#3B82F6", "#F97316"];
+const COLORS = ["#F97316", "#1B2E5C", "#F97316", "#1B2E5C", "#F97316", "#1B2E5C"];
 
 const DEFAULT_FEATURES = [
   { title: "Independent & Unbiased", description: "We work for you — not the builder, developer, or agent. Our reports are objective, thorough, and always in your interest." },
@@ -49,9 +49,9 @@ export function WhyUs({ features = DEFAULT_FEATURES }: { features?: { title: str
           <div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium uppercase tracking-widest mb-4"
             style={{
-              background: "rgba(37,99,235,0.07)",
-              border: "1px solid rgba(37,99,235,0.18)",
-              color: "#2563EB",
+              background: "rgba(249,115,22,0.07)",
+              border: "1px solid rgba(249,115,22,0.18)",
+              color: "#F97316",
             }}
           >
             Why Everestics
@@ -61,7 +61,7 @@ export function WhyUs({ features = DEFAULT_FEATURES }: { features?: { title: str
             style={{ color: "#1B2E5C" }}
           >
             The standard others{" "}
-            <span className="gradient-text-blue">should be held to.</span>
+            <span className="gradient-text-orange">should be held to.</span>
           </h2>
           <p className="text-lg" style={{ color: "#6B7280" }}>
             We built our practice on one principle: you deserve the complete picture, every time.

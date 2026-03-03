@@ -7,10 +7,10 @@ import { QuoteForm } from "@/components/contact/QuoteForm";
 const ease = "easeOut" as const;
 
 const contactDetails = [
-  { icon: Phone, label: "Phone", value: "02 0000 0000", href: "tel:+61200000000", color: "#F97316" },
-  { icon: Mail, label: "Email", value: "hello@everestics.com.au", href: "mailto:hello@everestics.com.au", color: "#2563EB" },
-  { icon: MapPin, label: "Locations", value: "Newcastle & Sydney CBD", href: null, color: "#F97316" },
-  { icon: Clock, label: "Response Time", value: "Within 4 business hours", href: null, color: "#2563EB" },
+  { icon: Phone,  label: "Phone",         value: "0451 171 987",                      href: "tel:0451171987",                              color: "#F97316" },
+  { icon: Mail,   label: "Email",          value: "everesticsinspections@gmail.com",   href: "mailto:everesticsinspections@gmail.com",      color: "#1B2E5C" },
+  { icon: MapPin, label: "Locations",      value: "Newcastle & Sydney CBD",            href: null,                                          color: "#F97316" },
+  { icon: Clock,  label: "Response Time",  value: "Within 4 business hours",           href: null,                                          color: "#1B2E5C" },
 ];
 
 export default function ContactPage() {

@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Stores all quote requests submitted through the website or manually added
+model Quote {
+  id              String   @id @default(cuid())
+  name            String
+  email           String
+  phone           String
+  service         String
+  address         String
+  propertyType    String
+  message         String?
+  preferredDate   String?
+  createdAt       DateTime @default(now())
+  status          String   @default("pending") // "pending" | "quoted" | "booked"
+  quotedAmountAud Float?
+
+  @@map("quotes")
+}
+
+// Stores all editable site content as a single JSON blob keyed by "site-content"
+model SiteContent {
+  key   String @id
+  value Json
+
+  @@map("site_content")
+}
