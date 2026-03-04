@@ -309,8 +309,8 @@ export function quoteOfferEmail(data: {
     ${refCode ? `
     <div style="background:#F7F8FA;border:1px solid #E8EAED;border-radius:12px;padding:16px 20px;margin-top:16px;">
       <p style="margin:0 0 6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#9CA3AF;">Your Reference Code</p>
-      <p style="margin:0 0 8px;font-size:12px;color:#6B7280;">Can't click the button above? Go to <a href="https://www.everestics.com.au/book" style="color:#F97316;">everestics.com.au/book</a> and enter this code:</p>
-      <p style="margin:0;font-size:11px;font-family:monospace;color:#1B2E5C;word-break:break-all;background:#FFFFFF;border:1px solid #E8EAED;border-radius:8px;padding:10px 12px;">${refCode}</p>
+      <p style="margin:0 0 10px;font-size:12px;color:#6B7280;">Save this code. If the button above doesn't work, visit <a href="https://www.everestics.com.au/book" style="color:#F97316;">everestics.com.au/book</a> and enter it:</p>
+      <p style="margin:0;font-size:20px;font-weight:700;font-family:monospace;color:#1B2E5C;letter-spacing:3px;text-align:center;background:#FFFFFF;border:2px solid #E8EAED;border-radius:8px;padding:12px 16px;">${refCode}</p>
     </div>` : ""}
 
     <table width="100%" style="margin-top:16px;background:#F7F8FA;border:1px solid #E8EAED;border-radius:12px;">

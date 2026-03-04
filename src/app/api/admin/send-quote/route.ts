@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { createHmac } from "crypto";
+import { randomBytes } from "crypto";
 import { sendQuoteOffer } from "@/lib/emails";
-import { updateQuoteStatus } from "@/lib/quoteStore";
+import { saveQuoteOffer } from "@/lib/quoteStore";
 
 async function isAuthenticated() {
   const cookieStore = await cookies();
@@ -10,8 +10,15 @@ async function isAuthenticated() {
   return session?.value === process.env.ADMIN_SESSION_TOKEN;
 }
 
-function b64url(str: string): string {
-  return Buffer.from(str).toString("base64url");
+/** Generates a human-readable 10-char reference code, e.g. "EVR-AB12CD" */
+function generateShortCode(): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no I/O/0/1 to avoid confusion
+  let code = "EVR-";
+  const bytes = randomBytes(6);
+  for (let i = 0; i < 6; i++) {
+    code += chars[bytes[i] % chars.length];
+  }
+  return code;
 }
 
 export async function POST(req: NextRequest) {
@@ -25,25 +32,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
   }
 
-  const secret = process.env.ADMIN_SESSION_TOKEN;
-  if (!secret) {
-    return NextResponse.json({ error: "Server misconfiguration." }, { status: 500 });
-  }
-
-  // Build HMAC-signed token
-  const amountCents = Math.round(parseFloat(amountAud) * 100);
-  const exp = Math.floor(Date.now() / 1000) + 7 * 24 * 3600; // 7 days
-  const payload = b64url(JSON.stringify({ name, email, service, amountCents, exp }));
-  const sig = createHmac("sha256", secret).update(payload).digest("base64url");
-  const token = `${payload}.${sig}`;
+  const shortCode = generateShortCode();
+  const tokenExpiry = new Date(Date.now() + 7 * 24 * 3600 * 1000); // 7 days from now
 
   const origin = req.headers.get("origin") ?? req.nextUrl.origin;
-  const paymentLink = `${origin}/book?quote=${token}`;
+  const paymentLink = `${origin}/book?quote=${shortCode}`;
 
   try {
     await sendQuoteOffer({ name, email, service, amountAud: parseFloat(amountAud), paymentLink });
     if (quoteId) {
-      await updateQuoteStatus(quoteId, "quoted", parseFloat(amountAud));
+      await saveQuoteOffer(quoteId, shortCode, parseFloat(amountAud), tokenExpiry);
     }
     return NextResponse.json({ ok: true, paymentLink });
   } catch (err) {

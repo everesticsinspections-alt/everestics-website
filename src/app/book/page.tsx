@@ -444,19 +444,22 @@ function BookPageContent() {
               Have a reference code?
             </p>
             <p className="text-xs mb-3" style={{ color: "#9CA3AF" }}>
-              Paste the code from your quote email to lock in your price automatically.
+              Enter the reference code from your quote email (e.g. EVR-AB1234) to lock in your price.
             </p>
             <div className="flex gap-2">
               <input
                 value={refCodeInput}
-                onChange={(e) => { setRefCodeInput(e.target.value); setRefCodeError(""); }}
+                onChange={(e) => { setRefCodeInput(e.target.value.toUpperCase()); setRefCodeError(""); }}
                 onKeyDown={(e) => e.key === "Enter" && applyRefCode()}
-                placeholder="Paste reference code from your email…"
+                placeholder="EVR-XXXXXX"
+                maxLength={10}
                 style={{
                   ...inputStyle(),
                   fontFamily: "monospace",
                   flex: 1,
-                  fontSize: "11px",
+                  fontSize: "15px",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
                 }}
               />
               <button

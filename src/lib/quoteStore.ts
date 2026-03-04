@@ -79,3 +79,21 @@ export async function updateQuoteStatus(
     },
   });
 }
+
+/** Called when admin sends a quote offer. Stores the short reference code and expiry. */
+export async function saveQuoteOffer(
+  id: string,
+  shortCode: string,
+  quotedAmountAud: number,
+  tokenExpiry: Date
+): Promise<void> {
+  await prisma.quote.update({
+    where: { id },
+    data:  { status: "quoted", quotedAmountAud, shortCode, tokenExpiry },
+  });
+}
+
+/** Look up a quote by its short reference code (e.g. "EVR-AB1234"). */
+export async function getQuoteByShortCode(shortCode: string) {
+  return prisma.quote.findUnique({ where: { shortCode } });
+}

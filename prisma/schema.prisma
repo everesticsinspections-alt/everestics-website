@@ -21,6 +21,8 @@ model Quote {
   createdAt       DateTime @default(now())
   status          String   @default("pending") // "pending" | "quoted" | "booked"
   quotedAmountAud Float?
+  shortCode       String?  @unique // e.g. "EVR-AB1234" — used as the customer-facing reference
+  tokenExpiry     DateTime? // when the quote offer expires (7 days from send)
 
   @@map("quotes")
 }
