@@ -38,19 +38,40 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 
 export function Stats() {
   return (
-    <section className="py-20" style={{ background: "#F7F8FA", borderTop: "1px solid #E8EAED", borderBottom: "1px solid #E8EAED" }}>
+    <section className="py-20" style={{ background: "#F7F8FA", borderBottom: "1px solid #E8EAED" }}>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {/* Section label */}
+        <motion.p
+          className="text-center text-xs font-semibold uppercase tracking-widest mb-10"
+          style={{ color: "#F97316" }}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" as const }}
+        >
+          By the numbers
+        </motion.p>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
-              className="flex flex-col items-center text-center py-8 px-6 rounded-2xl"
-              style={{ background: "#FFFFFF", border: "1px solid #E8EAED", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
+              className="flex flex-col items-center text-center py-8 px-6 rounded-2xl relative overflow-hidden"
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid #E8EAED",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+              }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" as const }}
             >
+              {/* Accent top border */}
+              <div
+                className="absolute top-0 left-0 right-0 h-0.5"
+                style={{ background: i % 2 === 0 ? "#F97316" : "#1B2E5C" }}
+              />
               <div
                 className="text-4xl md:text-5xl font-bold tabular-nums mb-1"
                 style={{ color: i % 2 === 0 ? "#F97316" : "#1B2E5C" }}
