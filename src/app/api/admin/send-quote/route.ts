@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { randomBytes } from "crypto";
 import { sendQuoteOffer } from "@/lib/emails";
-import { saveQuoteOffer } from "@/lib/quoteStore";
+import { saveQuote, saveQuoteOffer } from "@/lib/quoteStore";
 
 async function isAuthenticated() {
   const cookieStore = await cookies();
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { name, email, service, address, amountAud, quoteId } = await req.json();
+  const { name, email, service, address, phone, amountAud, quoteId } = await req.json();
 
   if (!name || !email || !service || !amountAud) {
     return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
@@ -36,9 +36,23 @@ export async function POST(req: NextRequest) {
 
   try {
     await sendQuoteOffer({ name, email, service, address, amountAud: parseFloat(amountAud), paymentLink });
+
     if (quoteId) {
+      // Quote submitted via website — update existing record
       await saveQuoteOffer(quoteId, shortCode, parseFloat(amountAud), tokenExpiry);
+    } else {
+      // Manual send — create a Quote record so the shortCode can be looked up later
+      const newQuote = await saveQuote({
+        name,
+        email,
+        phone: phone ?? "",
+        service,
+        address: address ?? "",
+        propertyType: "residential",
+      });
+      await saveQuoteOffer(newQuote.id, shortCode, parseFloat(amountAud), tokenExpiry);
     }
+
     return NextResponse.json({ ok: true, paymentLink });
   } catch (err) {
     console.error("send-quote email error:", err);
