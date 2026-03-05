@@ -7,12 +7,12 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "No reference code provided." }, { status: 400 });
   }
 
-  // Short code format: EVR-XXXXXX
-  if (!token.startsWith("EVR-")) {
-    return NextResponse.json({ error: "Invalid reference code format." }, { status: 400 });
+  // Short code format: 6-digit number e.g. "482951"
+  if (!/^\d{6}$/.test(token)) {
+    return NextResponse.json({ error: "Reference code must be a 6-digit number." }, { status: 400 });
   }
 
-  const quote = await getQuoteByShortCode(token.toUpperCase());
+  const quote = await getQuoteByShortCode(token);
 
   if (!quote) {
     return NextResponse.json({ error: "Reference code not found. Please check and try again." }, { status: 404 });
@@ -29,7 +29,10 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({
     name: quote.name,
     email: quote.email,
+    phone: quote.phone,
     service: quote.service,
+    address: quote.address,
+    propertyType: quote.propertyType,
     amountAud: quote.quotedAmountAud,
   });
 }

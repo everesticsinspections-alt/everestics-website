@@ -268,7 +268,10 @@ function BookPageContent() {
         } else {
           setName(data.name ?? "");
           setEmail(data.email ?? "");
+          setPhone(data.phone ?? "");
           setService(data.service ?? "");
+          setAddress(data.address ?? "");
+          if (data.propertyType) setPropertyType(data.propertyType as typeof propertyType);
           setQuotedAmount(String(data.amountAud));
           setAmountLocked(true);
         }
@@ -291,7 +294,10 @@ function BookPageContent() {
       } else {
         setName(data.name ?? "");
         setEmail(data.email ?? "");
+        setPhone(data.phone ?? "");
         setService(data.service ?? "");
+        setAddress(data.address ?? "");
+        if (data.propertyType) setPropertyType(data.propertyType as typeof propertyType);
         setQuotedAmount(String(data.amountAud));
         setAmountLocked(true);
       }
@@ -449,10 +455,10 @@ function BookPageContent() {
             <div className="flex gap-2">
               <input
                 value={refCodeInput}
-                onChange={(e) => { setRefCodeInput(e.target.value.toUpperCase()); setRefCodeError(""); }}
+                onChange={(e) => { setRefCodeInput(e.target.value.replace(/\D/g, "")); setRefCodeError(""); }}
                 onKeyDown={(e) => e.key === "Enter" && applyRefCode()}
-                placeholder="EVR-XXXXXX"
-                maxLength={10}
+                placeholder="e.g. 482951"
+                maxLength={6}
                 style={{
                   ...inputStyle(),
                   fontFamily: "monospace",

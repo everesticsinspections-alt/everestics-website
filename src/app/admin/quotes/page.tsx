@@ -92,6 +92,7 @@ function SendQuoteInline({ quote, onSent }: { quote: QuoteRequest; onSent: () =>
           name: quote.name,
           email: quote.email,
           service: quote.service,
+          address: quote.address,
           amountAud: amount,
           quoteId: quote.id,
         }),

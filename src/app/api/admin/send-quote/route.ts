@@ -10,15 +10,11 @@ async function isAuthenticated() {
   return session?.value === process.env.ADMIN_SESSION_TOKEN;
 }
 
-/** Generates a human-readable 10-char reference code, e.g. "EVR-AB12CD" */
+/** Generates a 6-digit numeric reference code, e.g. "482951" */
 function generateShortCode(): string {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no I/O/0/1 to avoid confusion
-  let code = "EVR-";
-  const bytes = randomBytes(6);
-  for (let i = 0; i < 6; i++) {
-    code += chars[bytes[i] % chars.length];
-  }
-  return code;
+  const bytes = randomBytes(3); // 3 bytes = 0–16777215
+  const n = (bytes[0] << 16 | bytes[1] << 8 | bytes[2]) % 900000;
+  return String(100000 + n); // always 6 digits: 100000–999999
 }
 
 export async function POST(req: NextRequest) {
@@ -26,7 +22,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { name, email, service, amountAud, quoteId } = await req.json();
+  const { name, email, service, address, amountAud, quoteId } = await req.json();
 
   if (!name || !email || !service || !amountAud) {
     return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
@@ -39,7 +35,7 @@ export async function POST(req: NextRequest) {
   const paymentLink = `${origin}/book?quote=${shortCode}`;
 
   try {
-    await sendQuoteOffer({ name, email, service, amountAud: parseFloat(amountAud), paymentLink });
+    await sendQuoteOffer({ name, email, service, address, amountAud: parseFloat(amountAud), paymentLink });
     if (quoteId) {
       await saveQuoteOffer(quoteId, shortCode, parseFloat(amountAud), tokenExpiry);
     }

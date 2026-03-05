@@ -277,49 +277,58 @@ export function bookingAlertEmail(data: {
 export function quoteOfferEmail(data: {
   name: string;
   service: string;
+  address?: string;
   amountAud: number;
   paymentLink: string;
 }) {
   const formatted = new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD" }).format(data.amountAud);
-  // Extract token from paymentLink (everything after ?quote=)
+  // Extract reference code from paymentLink (everything after ?quote=)
   const refCode = data.paymentLink.split("?quote=")[1] ?? "";
   const body = `
     <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#1B2E5C;">
       Your quote is ready, ${data.name.split(" ")[0]}!
     </h2>
     <p style="margin:0 0 20px;font-size:14px;color:#6B7280;line-height:1.6;">
-      We've prepared a quote for your upcoming inspection. Review the details below and click the button to pay and lock in your date.
+      We've reviewed your inspection request and prepared a personalised quote for you.
     </p>
 
-    <div style="background:rgba(249,115,22,0.05);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:20px 24px;margin-bottom:24px;">
-      <p style="margin:0 0 4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#EA580C;">Your Quote</p>
-      <p style="margin:0 0 4px;font-size:15px;color:#1B2E5C;font-weight:600;">${data.service}</p>
-      <p style="margin:0;font-size:28px;font-weight:800;color:#F97316;">${formatted} AUD</p>
-    </div>
+    <!-- Inspection details -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#F7F8FA;border:1px solid #E8EAED;border-radius:12px;margin-bottom:20px;">
+      <tr><td style="padding:14px 20px 6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9CA3AF;">Inspection Details</td></tr>
+      ${row("Service", data.service)}
+      ${data.address ? row("Property", data.address) : ""}
+      ${row("Amount Quoted", `<span style="color:#F97316;font-weight:700;">${formatted} AUD</span>`)}
+      <tr><td style="padding:6px 0;"></td></tr>
+    </table>
 
-    <a href="${data.paymentLink}"
-       style="display:block;text-align:center;background:linear-gradient(135deg,#F97316,#EA580C);color:#FFFFFF;font-size:15px;font-weight:700;padding:16px 32px;border-radius:12px;text-decoration:none;margin-bottom:20px;">
-      Pay &amp; Book Now →
-    </a>
+    <!-- CTA button — solid background works in all email clients -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+      <tr>
+        <td align="center">
+          <a href="${data.paymentLink}"
+             style="display:inline-block;background:#F97316;color:#FFFFFF;font-size:16px;font-weight:700;padding:16px 48px;border-radius:10px;text-decoration:none;mso-padding-alt:0;text-align:center;">
+            &#128274;&nbsp; Pay &amp; Book Now
+          </a>
+        </td>
+      </tr>
+    </table>
 
-    <p style="margin:0 0 8px;font-size:12px;color:#9CA3AF;text-align:center;">
-      This quote link expires in <strong style="color:#6B7280;">7 days</strong>. The amount is fixed and cannot be changed.
+    <p style="margin:0 0 20px;font-size:12px;color:#9CA3AF;text-align:center;">
+      This quote expires in <strong style="color:#6B7280;">7 days</strong>. Amount is fixed and cannot be changed.
     </p>
 
     ${refCode ? `
-    <div style="background:#F7F8FA;border:1px solid #E8EAED;border-radius:12px;padding:16px 20px;margin-top:16px;">
-      <p style="margin:0 0 6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#9CA3AF;">Your Reference Code</p>
-      <p style="margin:0 0 10px;font-size:12px;color:#6B7280;">Save this code. If the button above doesn't work, visit <a href="https://www.everestics.com.au/book" style="color:#F97316;">everestics.com.au/book</a> and enter it:</p>
-      <p style="margin:0;font-size:20px;font-weight:700;font-family:monospace;color:#1B2E5C;letter-spacing:3px;text-align:center;background:#FFFFFF;border:2px solid #E8EAED;border-radius:8px;padding:12px 16px;">${refCode}</p>
+    <div style="background:#FFF7ED;border:2px solid #FED7AA;border-radius:12px;padding:16px 20px;margin-bottom:20px;text-align:center;">
+      <p style="margin:0 0 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#EA580C;">Your Booking Code</p>
+      <p style="margin:0 0 10px;font-size:12px;color:#92400E;">Button not working? Go to <a href="https://www.everestics.com.au/book" style="color:#EA580C;font-weight:600;">everestics.com.au/book</a> and enter this code:</p>
+      <p style="margin:0;font-size:32px;font-weight:800;font-family:monospace;color:#1B2E5C;letter-spacing:6px;">${refCode}</p>
     </div>` : ""}
 
-    <table width="100%" style="margin-top:16px;background:#F7F8FA;border:1px solid #E8EAED;border-radius:12px;">
+    <table width="100%" style="background:#F7F8FA;border:1px solid #E8EAED;border-radius:12px;">
+      <tr><td style="padding:12px 20px 6px;font-size:12px;font-weight:600;color:#374151;">What happens next</td></tr>
+      ${["Click the button above to securely pay your deposit", "We contact you within 4 hours to confirm your inspection date and time", "Receive your detailed written report within 24 hours of the inspection"].map((step, i) => `
       <tr>
-        <td style="padding:12px 16px;font-size:12px;color:#6B7280;">What happens next</td>
-      </tr>
-      ${["Complete payment using the button above", "We contact you within 4 hours to confirm your inspection date and time", "Receive your detailed report within 24 hours of the inspection"].map((step, i) => `
-      <tr>
-        <td style="padding:6px 16px 6px 20px;font-size:13px;color:#374151;">
+        <td style="padding:5px 20px 5px 24px;font-size:13px;color:#6B7280;">
           <span style="color:#F97316;font-weight:700;">${i + 1}.</span> ${step}
         </td>
       </tr>`).join("")}
@@ -360,6 +369,7 @@ export async function sendQuoteOffer(data: {
   name: string;
   email: string;
   service: string;
+  address?: string;
   amountAud: number;
   paymentLink: string;
 }) {
