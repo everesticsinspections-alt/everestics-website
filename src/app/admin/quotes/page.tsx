@@ -337,6 +337,8 @@ function QuoteRow({
 function ManualSendQuote() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [service, setService] = useState("");
   const [amount, setAmount] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -365,13 +367,15 @@ function ManualSendQuote() {
       const res = await fetch("/api/admin/send-quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, service, amountAud: amount }),
+        body: JSON.stringify({ name, email, phone, address, service, amountAud: amount }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Failed to send");
       setResult({ link: data.paymentLink });
       setName("");
       setEmail("");
+      setPhone("");
+      setAddress("");
       setService("");
       setAmount("");
       setErrors({});
@@ -498,6 +502,32 @@ function ManualSendQuote() {
                   {errors.email}
                 </p>
               )}
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
+                Phone (optional)
+              </label>
+              <input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                type="tel"
+                placeholder="04XX XXX XXX"
+                style={inputStyle()}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
+                Property Address (optional)
+              </label>
+              <input
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="12 Builder St, Newcastle NSW"
+                style={inputStyle()}
+              />
             </div>
           </div>
 

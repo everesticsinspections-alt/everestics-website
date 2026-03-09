@@ -355,6 +355,7 @@ function BookPageContent() {
           address,
           propertyType,
           date,
+          shortCode: (quoteToken ?? refCodeInput.trim()) || undefined,
         }),
       });
       const data = await res.json();
@@ -511,7 +512,7 @@ function BookPageContent() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                     {SERVICES.map((s) => {
                       const Icon = s.icon;
-                      const sel = service === s.id;
+                      const sel = service === s.id || service === s.label;
                       return (
                         <button
                           key={s.id}

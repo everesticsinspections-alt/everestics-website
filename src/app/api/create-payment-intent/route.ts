@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
   try {
     const stripe = getStripe();
     const body = await req.json();
-    const { amountAud, service, name, email, phone, address, propertyType, date } = body;
+    const { amountAud, service, name, email, phone, address, propertyType, date, shortCode } = body;
 
     // Validate required fields
     if (!name || !email || !service || !address) {
@@ -82,6 +82,7 @@ export async function POST(req: NextRequest) {
         address:        meta(address),
         property_type:  meta(propertyType),
         preferred_date: meta(date),
+        ...(shortCode ? { short_code: meta(shortCode) } : {}),
       },
       description: `Everestics — ${meta(service)}`,
       receipt_email: String(email),

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { sendBookingEmails } from "@/lib/emails";
+import { getQuoteByShortCode, updateQuoteStatus } from "@/lib/quoteStore";
 
 // Stripe requires the raw body to verify the webhook signature.
 // Next.js App Router gives us access to the raw body via req.text().
@@ -44,11 +45,20 @@ export async function POST(req: NextRequest) {
         address: meta.address ?? "",
         propertyType: meta.property_type ?? "",
         date: meta.preferred_date,
-        amountAud: intent.amount / 100, // convert cents back to dollars
+        amountAud: intent.amount / 100,
       });
     } catch (err) {
-      // Log but don't fail — Stripe will retry if we return an error
       console.error("[stripe-webhook] Failed to send emails:", err);
+    }
+
+    // Mark the quote as booked in the DB
+    if (meta.short_code) {
+      try {
+        const quote = await getQuoteByShortCode(meta.short_code);
+        if (quote) await updateQuoteStatus(quote.id, "booked");
+      } catch (err) {
+        console.error("[stripe-webhook] Failed to update quote status:", err);
+      }
     }
   }
 
